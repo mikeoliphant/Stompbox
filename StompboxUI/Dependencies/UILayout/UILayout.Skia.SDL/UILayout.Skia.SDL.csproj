@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>UILayout</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Resources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NativeFileDialogNET" Version="2.0.2" />
+    <PackageReference Include="ppy.SDL2-CS" Version="1.0.82" />
+    <PackageReference Include="SkiaSharp" Version="3.118.0-preview.2.3" />
+  </ItemGroup>
+
+  <Import Project="..\UILayout.Skia\UILayout.Skia.projitems" Label="Shared" />
+
+  <Import Project="..\UILayout\UILayout.projitems" Label="Shared" />
+
+  <Import Project="..\UILayout.CrossPlatform\UILayout.CrossPlatform.projitems" Label="Shared" />
+
+</Project>

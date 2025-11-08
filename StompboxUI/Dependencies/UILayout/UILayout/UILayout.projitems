@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>7da2b397-a39f-4e5b-96ed-f206329982c9</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>UILayout</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Button.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Color.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContentLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EditableImage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FileSelector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FlipList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Font.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Image.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ImageElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ImageManifest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InputDialog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InputManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LayoutElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MathUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Menu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RectF.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScrollBar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Slider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SpriteFont.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SwipeList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TabPanel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TextBlock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TextBox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Touch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UIElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Layout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InputKey.cs" />
+  </ItemGroup>
+</Project>

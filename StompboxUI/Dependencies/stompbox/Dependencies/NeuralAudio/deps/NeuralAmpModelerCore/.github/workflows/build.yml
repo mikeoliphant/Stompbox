@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  [workflow_dispatch, pull_request]
+
+env:
+  BUILD_TYPE: Release
+  
+jobs:
+  build-ubuntu:
+    name: Build Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3.3.0
+      with:
+        submodules: recursive
+    
+    - name: Build Tools
+      working-directory: ${{github.workspace}}/build
+      env:
+        CXX: clang++
+      run: |
+        cmake ..
+        cmake --build . -j4
+    
+    - name: Run tests
+      working-directory: ${{github.workspace}}
+      run: |
+        ./build/tools/run_tests
+        ./build/tools/benchmodel ./example_models/wavenet.nam
+        ./build/tools/benchmodel ./example_models/lstm.nam

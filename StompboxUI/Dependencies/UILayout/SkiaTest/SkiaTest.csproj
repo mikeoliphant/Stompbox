@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\UILayout.Skia.WPF\UILayout.Skia.WPF.csproj" />
+	</ItemGroup>
+
+	<Import Project="..\UILayout.Test\UILayout.Test.projitems" Label="Shared" />
+
+</Project>

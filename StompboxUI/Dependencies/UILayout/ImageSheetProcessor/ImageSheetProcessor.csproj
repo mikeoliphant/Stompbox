@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Remove="C:\Users\oliph\.nuget\packages\sharpfont.dependencies\2.6.0\build\..\bin\msvc10\x86\freetype6.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="freetype6.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="freetype6.dll">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.4" />
+		<PackageReference Include="SpaceWizards.SharpFont" Version="1.0.2" />
+		<PackageReference Include="StbImageSharp" Version="2.30.15" />
+		<PackageReference Include="StbImageWriteSharp" Version="1.16.7" />
+		<PackageReference Include="Svg" Version="3.4.7" />
+	</ItemGroup>
+
+	<Import Project="..\UILayout\UILayout.projitems" Label="Shared" />
+
+	<Import Project="..\UILayout.MonoGame\UILayout.MonoGame.projitems" Label="Shared" />
+
+	<Import Project="..\UILayout.DefaultTextures\UILayout.DefaultTextures.projitems" Label="Shared" />
+</Project>
