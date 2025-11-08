@@ -10,13 +10,13 @@
 	<Import Project="..\StompboxAPIBase\StompboxAPIBase.projitems" Label="Shared" />
 
 	<ItemGroup Condition="'$(Configuration)'=='Debug'">
-	  <None Include="..\..\Dependencies\stompbox\build\stompbox-capi\Debug\stompbox-capi.dll" Link="stompbox-capi.dll">
+	  <None Include="..\..\..\build\stompbox-capi\Debug\stompbox-capi.dll" Link="stompbox-capi.dll">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)'=='Release'">
-		<None Include="..\..\Dependencies\stompbox\build\stompbox-capi\Release\stompbox-capi.dll" Link="stompbox-capi.dll">
+		<None Include="..\..\..\build\stompbox-capi\Release\stompbox-capi.dll" Link="stompbox-capi.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

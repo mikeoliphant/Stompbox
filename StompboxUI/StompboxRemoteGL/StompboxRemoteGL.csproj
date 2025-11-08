@@ -29,7 +29,7 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dependencies\UILayout\UILayout.MonoGame.DesktopGL\UILayout.MonoGame.DesktopGL.csproj" />
+    <ProjectReference Include="..\..\Dependencies\UILayout\UILayout.MonoGame.DesktopGL\UILayout.MonoGame.DesktopGL.csproj" />
     <ProjectReference Include="..\StompboxClient\StompboxRemoteClient\StompboxRemoteClient.csproj" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">

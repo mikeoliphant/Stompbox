@@ -6,7 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Dependencies\UILayout\ImageSheetProcessor\ImageSheetProcessor.csproj" />
+	  <ProjectReference Include="..\..\Dependencies\UILayout\ImageSheetProcessor\ImageSheetProcessor.csproj" />
 	</ItemGroup>
 
 </Project>
