@@ -1,4 +1,4 @@
-[submodule "StompboxUI/Dependencies/UILayout"]
+[submodule "Dependencies/UILayout"]
 	path = Dependencies/UILayout
 	url = https://github.com/mikeoliphant/UILayout
 [submodule "Dependencies/dr_libs"]
