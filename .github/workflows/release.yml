@@ -35,7 +35,7 @@ jobs:
         submodules: recursive
 
     - name: Configure stompbox
-      working-directory: ${{github.workspace}}/Dependencies/stompbox/build
+      working-directory: ${{github.workspace}}/build
       run: |
         cmake.exe -G "Visual Studio 17 2022" -A x64  ..
         cmake --build . --config Release
@@ -43,20 +43,20 @@ jobs:
     - name: Run Image Processor
       working-directory: ${{github.workspace}}
       run: |
-        dotnet build -c Release StompboxImageProcessor
-        cd StompboxImageProcessor\bin\Release\net8.0
-        .\StompboxImageProcessor.exe
+        dotnet build -c Release StompboxUI\StompboxImageProcessor
+        cd StompboxUI\StompboxImageProcessor\bin\Release\net8.0
+        .\StompboxUI\StompboxImageProcessor.exe
         
     - name: Build Plugin
       working-directory: ${{github.workspace}}
-      run: dotnet build -c Release StompboxPlugin
+      run: dotnet build -c Release StompboxUI\StompboxPlugin
 
     - name: Add Plugin Archive
       working-directory: ${{github.workspace}}
       run: |
         mkdir plugin-build
-        move StompboxPlugin\bin\Release\net8.0-windows plugin-build\StompboxPlugin
-        cp StompboxPlugin\README.txt plugin-build
+        move StompboxUI\StompboxPlugin\bin\Release\net8.0-windows plugin-build\StompboxPlugin
+        cp StompboxUI\StompboxPlugin\README.txt plugin-build
         Compress-Archive -Path plugin-build\* -Destination StompboxVST3Plugin.zip
     
     - name: Upload Plugin Asset
@@ -71,10 +71,10 @@ jobs:
 
     - name: Build for Windows Remote
       working-directory: ${{github.workspace}}
-      run: dotnet build -c Release StompboxRemote
+      run: dotnet build -c Release StompboxUI\StompboxRemote
 
     - name: Add Windows Remote Archive
-      run: Compress-Archive -Path ${{github.workspace}}\StompboxRemote\bin\Release\net8.0-windows\* -Destination StompboxRemote.zip
+      run: Compress-Archive -Path ${{github.workspace}}\StompboxUI\StompboxRemote\bin\Release\net8.0-windows\* -Destination StompboxRemote.zip
     
     - name: Upload Windows Remote Asset
       uses: actions/upload-release-asset@v1
@@ -95,7 +95,7 @@ jobs:
     - name: Build Android Remote
       run: |
         echo -n ${{ secrets.KEYSTORE }} | base64 --ignore-garbage --decode > ${{github.workspace}}\android.keystore
-        dotnet publish -f net8.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore="${{github.workspace}}\android.keystore" -p:AndroidSigningKeyAlias=stompboxkeystore -p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASS }}"  -p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASS }}" StompboxAndroid
+        dotnet publish -f net8.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore="${{github.workspace}}\android.keystore" -p:AndroidSigningKeyAlias=stompboxkeystore -p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASS }}"  -p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASS }}" StompboxUI\StompboxAndroid
 
     - name: Upload Android Remote Asset
       uses: actions/upload-release-asset@v1
@@ -103,19 +103,19 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_path: ${{github.workspace}}\StompboxAndroid\bin\Release\net8.0-android\StompboxAndroid.StompboxAndroid-Signed.apk
+        asset_path: ${{github.workspace}}\StompboxUI\StompboxAndroid\bin\Release\net8.0-android\StompboxAndroid.StompboxAndroid-Signed.apk
         asset_name: StompboxAndroid.StompboxAndroid-Signed.apk
         asset_content_type: application/zip         
 
     - name: Publish Linux-x64
       working-directory: ${{github.workspace}}
-      run: dotnet publish .\StompboxRemoteGL\StompboxRemoteGL.csproj --runtime linux-x64 -p:PublishSingleFile=true --self-contained true
+      run: dotnet publish .\StompboxUI\StompboxRemoteGL\StompboxRemoteGL.csproj --runtime linux-x64 -p:PublishSingleFile=true --self-contained true
 
     - name: Add Linux-x64 Archive
       working-directory: ${{github.workspace}}
       run: |
         mkdir linux-x64-build
-        move StompboxRemoteGL\bin\Release\net8.0\linux-x64\publish linux-x64-build\StompboxRemote
+        move StompboxUI\StompboxRemoteGL\bin\Release\net8.0\linux-x64\publish linux-x64-build\StompboxRemote
         Compress-Archive -Path linux-x64-build\* -Destination StompboxRemoteLinux-X64.zip
 
     - name: Upload Linux-x64 Asset
@@ -130,13 +130,13 @@ jobs:
 
     - name: Publish Linux-arm64
       working-directory: ${{github.workspace}}
-      run: dotnet publish .\StompboxRemoteGL\StompboxRemoteGL.csproj --runtime linux-arm64 -p:PublishSingleFile=true --self-contained true
+      run: dotnet publish .\StompboxUI\StompboxRemoteGL\StompboxRemoteGL.csproj --runtime linux-arm64 -p:PublishSingleFile=true --self-contained true
 
     - name: Add Linux-arm64 Archive
       working-directory: ${{github.workspace}}
       run: |
         mkdir linux-arm64-build
-        move StompboxRemoteGL\bin\Release\net8.0\linux-arm64\publish linux-arm64-build\StompboxRemote
+        move StompboxUI\StompboxRemoteGL\bin\Release\net8.0\linux-arm64\publish linux-arm64-build\StompboxRemote
         Compress-Archive -Path linux-arm64-build\* -Destination StompboxRemoteLinux-Arm64.zip
 
     - name: Upload Linux-arm64 Asset
@@ -151,13 +151,13 @@ jobs:
         
     - name: Publish OSX-x64
       working-directory: ${{github.workspace}}
-      run: dotnet publish .\StompboxRemoteGL\StompboxRemoteGL.csproj --runtime osx-x64 -p:PublishSingleFile=true --self-contained true
+      run: dotnet publish .\StompboxUI\StompboxRemoteGL\StompboxRemoteGL.csproj --runtime osx-x64 -p:PublishSingleFile=true --self-contained true
 
     - name: Add OSX-x64 Archive
       working-directory: ${{github.workspace}}
       run: |
         mkdir osx-x64-build
-        move StompboxRemoteGL\bin\Release\net8.0\osx-x64\publish osx-x64-build\StompboxRemote
+        move StompboxUI\StompboxRemoteGL\bin\Release\net8.0\osx-x64\publish osx-x64-build\StompboxRemote
         Compress-Archive -Path osx-x64-build\* -Destination StompboxRemoteMac-X64.zip
 
     - name: Upload OSX-x64 Asset
@@ -172,13 +172,13 @@ jobs:
 
     - name: Publish OSX-arm64
       working-directory: ${{github.workspace}}
-      run: dotnet publish .\StompboxRemoteGL\StompboxRemoteGL.csproj --runtime osx-arm64 -p:PublishSingleFile=true --self-contained true
+      run: dotnet publish .\StompboxUI\StompboxRemoteGL\StompboxRemoteGL.csproj --runtime osx-arm64 -p:PublishSingleFile=true --self-contained true
 
     - name: Add OSX-arm64 Archive
       working-directory: ${{github.workspace}}
       run: |
         mkdir osx-arm64-build
-        move StompboxRemoteGL\bin\Release\net8.0\osx-arm64\publish osx-arm64-build\StompboxRemote
+        move StompboxUI\StompboxRemoteGL\bin\Release\net8.0\osx-arm64\publish osx-arm64-build\StompboxRemote
         Compress-Archive -Path osx-arm64-build\* -Destination StompboxRemoteMac-Arm64.zip
         
     - name: Upload OSX-arm64 Asset
