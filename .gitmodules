@@ -1,6 +1,16 @@
-[submodule "Dependencies/stompbox"]
-	path = Dependencies/stompbox
-	url = https://github.com/mikeoliphant/stompbox
-[submodule "Dependencies/UILayout"]
-	path = Dependencies/UILayout
+[submodule "StompboxUI/Dependencies/UILayout"]
+	path = StompboxUI/Dependencies/UILayout
 	url = https://github.com/mikeoliphant/UILayout
+[submodule "Dependencies/dr_libs"]
+	path = Dependencies/dr_libs
+	url = https://github.com/mackron/dr_libs
+[submodule "Dependencies/r8brain-free-src"]
+	path = Dependencies/r8brain-free-src
+	url = https://github.com/avaneev/r8brain-free-src
+[submodule "Dependencies/WDL"]
+	path = Dependencies/WDL
+	url = https://github.com/mikeoliphant/WDL
+[submodule "Dependencies/NeuralAudio"]
+	path = Dependencies/NeuralAudio
+	url = https://github.com/mikeoliphant/NeuralAudio
+

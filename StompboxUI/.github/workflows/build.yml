@@ -1,0 +1,64 @@
+name: Build
+
+on:
+  [workflow_dispatch, push, pull_request]
+  
+jobs:
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Configure stompbox
+      working-directory: ${{github.workspace}}/Dependencies/stompbox/build
+      run: |
+        cmake.exe -G "Visual Studio 17 2022" -A x64  ..
+        cmake --build . --config Release
+        
+    - name: Run Image Processor
+      working-directory: ${{github.workspace}}
+      run: |
+        dotnet build -c Release StompboxImageProcessor
+        cd StompboxImageProcessor\bin\Release\net8.0
+        .\StompboxImageProcessor.exe
+        
+    - name: Build Plugin
+      working-directory: ${{github.workspace}}
+      run: dotnet build -c Release StompboxPlugin
+
+    - name: Create Plugin Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: StompboxVST3Plugin
+        path: ${{github.workspace}}\StompboxPlugin\bin\Release\net8.0-windows
+
+    - name: Build for Windows Remote
+      working-directory: ${{github.workspace}}
+      run: dotnet build -c Release StompboxRemote
+
+    - name: Create Windows Remote Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: StompboxRemote
+        path: ${{github.workspace}}\StompboxRemote\bin\Release\net8.0-windows
+
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'microsoft'
+        java-version: '17'
+
+    - name: Build Android Remote
+      run: |
+        echo -n ${{ secrets.KEYSTORE }} | base64 --ignore-garbage --decode > ${{github.workspace}}\android.keystore
+        dotnet publish -f net8.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore="${{github.workspace}}\android.keystore" -p:AndroidSigningKeyAlias=stompboxkeystore -p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASS }}"  -p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASS }}" StompboxAndroid
+      
+    - name: Create Android Remote Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: AndroidRemote
+        path: ${{github.workspace}}\StompboxAndroid\bin\Release\net8.0-android\StompboxAndroid.StompboxAndroid-Signed.apk
+
