@@ -1,2 +1,0 @@
-create_example(torch_conv1d)
-target_compile_definitions(RTNeural PRIVATE RTNEURAL_NO_DEBUG=1)

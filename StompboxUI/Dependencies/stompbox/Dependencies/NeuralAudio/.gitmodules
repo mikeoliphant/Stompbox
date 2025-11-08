@@ -1,9 +1,0 @@
-[submodule "deps/NeuralAmpModelerCore"]
-	path = deps/NeuralAmpModelerCore
-	url = https://github.com/mikeoliphant/NeuralAmpModelerCore
-[submodule "deps/RTNeural"]
-	path = deps/RTNeural
-	url = https://github.com/mikeoliphant/RTNeural
-[submodule "deps/math_approx"]
-	path = deps/math_approx
-	url = https://github.com/Chowdhury-DSP/math_approx

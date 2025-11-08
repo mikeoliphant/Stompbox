@@ -1,1 +1,0 @@
-create_example(rtneural_static_model)
