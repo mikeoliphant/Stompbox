@@ -1,12 +1,18 @@
 # What is it?
 
-Stompbox is a guitar amplification and effects library.
+Stompbox is a guitar amplification and effects application, arranged as a digital version of a guitar pedalboard.
 
-This repository is the core codebase. It can be run as a headless [jack](https://github.com/jackaudio) client using the stompbox-jack application. 
-
-[StompboxUI](https://github.com/mikeoliphant/StompboxUI) is the front-end GUI repository for stompbox. It can be used as a remote application to connect and control stompbox-jack, or it can be built along with the core code into a VST3 plugin.
+It can be run as a Windows VST plugin, or as stanalone headless [jack](https://github.com/jackaudio) client with a remote-controlled user interface. 
 
 I run it as both a VST3 plugin in a DAW on my PC, and (mostly) headless on my Raspberry Pi pedalboard.
+
+This is what the VST and Windows/Linux remote interface looks like:
+
+![stompbox](https://github.com/mikeoliphant/StompboxUI/assets/6710799/dd6e9349-ff0d-4437-af42-ef62f1096496)
+
+This is what it looks like running as an Android remote:
+
+![StompboxAndroid](https://github.com/mikeoliphant/StompboxUI/assets/6710799/3189e769-a28c-4e3b-8629-6846fb32de6c)
 
 Here is a video of it running on my pedalboard:
 
@@ -40,26 +46,45 @@ This is the hardware I'm using:
 * Tuner
 * Audio file player
 
+# Running as a Windows VST
+
+To run it as a VST3, you can simply download it from [the releases section of this repo](https://github.com/mikeoliphant/Stompbox/releases/latest).
+
+Simply extract the .zip file and copy the resulting folder to "C:\Program Files\Common Files\VST3".
+
+## VST user data location
+
+Files, such as NAM models, impulse responses, etc. go in your local user roaming AppData folder. Go to "%APPDATA%" in file explorer, and you should see a "stompbox" folder after the VST has been loaded at least once.
+
 # Building
-
-If you just want to run Stompbox as a Windows VST plugin, head over to the [StompboxUI](https://github.com/mikeoliphant/StompboxUI) repository and you can download binaries from the Releases section there.
-
-To build it yourself, read on.
 
 First clone the repository:
 ```bash
-git clone --recurse-submodules -j4 https://github.com/mikeoliphant/stompbox
+git clone --recurse-submodules -j4 https://github.com/mikeoliphant/Stompbox
 ```
 
-## Building stompbox-jack in Linux
+## Building on Windows
 
-To build the stombox-jack client, you need to have the jack development libraries installed:
+```bash
+cmake.exe -G "Visual Studio 17 2022" -A x64 ..
+cmake --build . --config=release -j4
+```
+
+Note - you'll have to change the Visual Studio version if you are using a different one.
+
+If you want to use Jack audio, you need to have Jack for windows installed before building:
+
+https://jackaudio.org/downloads/
+
+## Building on Liunux/MacOS
+
+To build the stombox-jack client, before building you need to have the jack development libraries installed:
 
 ```bash
 sudo apt-get install libjack-jackd2-dev
 ```
 
-Then compile the plugin using:
+Build with:
 
 ```bash
 cd stompbox/build
@@ -67,22 +92,30 @@ cmake .. -DCMAKE_BUILD_TYPE="Release"
 make
 ```
 
-## Building stompbox-jack in Windows
+## Building the remote app on Linux/MacOS
 
-You need to have jack for windows installed:
+To build StompboxRemoteGL on Linux, do the following:
 
-https://jackaudio.org/downloads/
-
-Configure the stompbox build with cmake:
-
-```bash
-cd stompbox/build
-cmake.exe -G "Visual Studio 17 2022" -A x64 ..
+Build StompboxImageProcessor:
+```
+dotnet build -c Release StompboxImageProcessor
 ```
 
-This will get you a Visual Studio solution with projects for the core library and stompbox-jack.
+Run it:
+```
+StompboxImageProcessor/bin/Release/net8.0/StompboxImageProcessor
+```
 
-# Running stompbox-jack
+Build StompboxRemoteGL:
+```
+dotnet build -c Release StompboxRemoteGL
+```
+
+and your executable will be: ```StompboxRemoteGL/bin/Release/net8.0/StompboxRemoteGL```
+
+**Note:** For file browser input to work, you need to have [Zenity](https://help.gnome.org/users/zenity/stable/index.html.en) installed.
+
+# Running headless with stompbox-jack
 
 After building, the binary will be in build/stompbox-jack.
 
@@ -114,17 +147,8 @@ In addition, if you send a MIDI patch change event, stompbox will attempt to loa
 
 Some more complicated MIDI stomp-based UI is also available if you are running the serial display interface - it gives interactive access to patch changes, tuner, stomps, etc.
 
-## Display Options
+# Using a microcontroller dispay
 
-There are a number of display options for interfacing with stompbox:
+Stompbox has built-in support for talking to a USB-connected microcontroller with display. I'm using a [Wio Terminal ](https://www.seeedstudio.com/Wio-Terminal-p-4509.html), but any Arduino-compatible microcontroller with an SPI display should work. It requires installing my [SerialTFT](https://github.com/mikeoliphant/SerialTFT) Arduino sketch on the microcontroller.
 
-- [StompboxUI](https://github.com/mikeoliphant/StompboxUI) - that repo has apps that can run as remote displays on Windows, Linux and Android. The Android interface also has a display mode designed for a phone or tablet mounted on a pedalboard.
-- Serial display. Stompbox has built-in support for talking to a USB-connected microcontroller with display. I'm using a [Wio Terminal ](https://www.seeedstudio.com/Wio-Terminal-p-4509.html), but any Arduino-compatible microcontroller with an SPI display should work. It requires installing my [SerialTFT](https://github.com/mikeoliphant/SerialTFT) Arduino sketch on the microcontroller.
 
-This is what the Windows/Linux remote looks like:
-
-![stompbox](https://github.com/mikeoliphant/StompboxUI/assets/6710799/dd6e9349-ff0d-4437-af42-ef62f1096496)
-
-This is what it looks like running as an Android remote:
-
-![StompboxAndroid](https://github.com/mikeoliphant/StompboxUI/assets/6710799/3189e769-a28c-4e3b-8629-6846fb32de6c)
