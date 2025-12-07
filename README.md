@@ -1,4 +1,4 @@
-# What is it?
+<img width="400" alt="Image" src="https://github.com/user-attachments/assets/4e4ae15e-2f02-4046-99bd-34736ca5a4b1" />
 
 Stompbox is a guitar amplification and effects application, arranged as a digital version of a guitar pedalboard.
 
