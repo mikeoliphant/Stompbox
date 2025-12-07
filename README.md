@@ -2,7 +2,7 @@
 
 Stompbox is a guitar amplification and effects application, arranged as a digital version of a guitar pedalboard.
 
-It can be run as a Windows VST plugin, or as stanalone headless [jack](https://github.com/jackaudio) client with a remote-controlled user interface. 
+It can be run as a Windows VST plugin, or as stanalone headless [JACK Audio](https://github.com/jackaudio) client with a remote-controlled user interface. 
 
 I run it as both a VST3 plugin in a DAW on my PC, and (mostly) headless on my Raspberry Pi pedalboard.
 
