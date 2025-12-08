@@ -6,6 +6,7 @@
 
 #include "PluginProcessor.h"
 #include "AudioFileRecorder.h"
+#include "DefaultPlugins.h"
 
 #ifdef __linux__
 #include <cstdlib>
@@ -67,6 +68,8 @@ PluginProcessor::PluginProcessor(std::filesystem::path dataPath, bool dawMode)
     ScanPresets();
 
     pluginFactory.SetDataPath(dataPath);
+
+    AddDefaultPlugins(pluginFactory);
 
     tmpBuf1 = new float[tmpBufSize];
     tmpBuf2 = new float[tmpBufSize];

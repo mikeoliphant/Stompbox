@@ -21,7 +21,9 @@ const char* GetStringVectorValue(void* strVec, size_t index)
 
 void* CreateProcessor(const wchar_t* dataPath, bool dawMode)
 {
-    return (void *)new PluginProcessor(dataPath, dawMode);
+    PluginProcessor* processor = new PluginProcessor(dataPath, dawMode);
+
+    return (void *)processor;
 }
 
 void DeleteProcessor(void* processor)
