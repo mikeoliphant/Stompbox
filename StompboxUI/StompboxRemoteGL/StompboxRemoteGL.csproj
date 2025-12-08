@@ -37,4 +37,5 @@
     <Exec Command="dotnet tool restore" />
   </Target>
   <Import Project="..\StompboxShared\StompboxShared.projitems" Label="Shared" />
+  <Import Project="..\StompboxMonoGame\StompboxMonoGame.projitems" Label="Shared" />
 </Project>

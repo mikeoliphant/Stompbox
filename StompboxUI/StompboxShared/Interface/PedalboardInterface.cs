@@ -35,10 +35,7 @@ namespace Stompbox
         {
             base.DrawContents();
 
-            float desiredScale = (Layout.Current as MonoGameLayout).UnscaledBounds.Width / 640.0f;
-
-            if (StompboxLayout.Instance.Scale != desiredScale)
-                StompboxLayout.Instance.Scale = desiredScale;
+            (Layout.Current as StompboxLayout).SetReferenceHeight(240.0f);
 
             if (StompboxClient.Instance.NeedUIReload)
             {
@@ -88,7 +85,7 @@ namespace Stompbox
 
                         if (((parameter != null) && (parameter.ParameterType == EParameterType.Bool)) || (ccMap.PluginParameter == "Enabled"))
                         {
-                            NinePatchButton button = new NinePatchButton(Layout.Current.GetImage("StompOutline"))
+                            NinePatchButton button = new NinePatchButton(Layout.Current.DefaultOutlineNinePatch) // Layout.Current.GetImage("StompOutline"))
                             {
                                 HorizontalAlignment = EHorizontalAlignment.Stretch
                             };

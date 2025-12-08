@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Iot.Device.Bindings" Version="4.0.1" />
+		<PackageReference Include="Iot.Device.Bindings.SkiaSharpAdapter" Version="4.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\StompboxClient\StompboxRemoteClient\StompboxRemoteClient.csproj" />
+	</ItemGroup>
+
+	<Import Project="..\..\Dependencies\UILayout\UILayout\UILayout.projitems" Label="Shared" />
+
+	<Import Project="..\..\Dependencies\UILayout\UILayout.DefaultTextures\UILayout.DefaultTextures.projitems" Label="Shared" />
+
+	<Import Project="..\StompboxShared\StompboxShared.projitems" Label="Shared" />
+
+	<Import Project="..\..\..\UILayout\UILayout.Skia\UILayout.Skia.projitems" Label="Shared" />
+
+</Project>

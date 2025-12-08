@@ -168,10 +168,7 @@ namespace Stompbox
 
             float height = StompboxClient.Instance.InClientMode ? 1750.0f : 1700.0f;
 
-            float desiredScale = (Layout.Current as MonoGameLayout).UnscaledBounds.Height / height;
-
-            if (StompboxLayout.Instance.Scale != desiredScale)
-                StompboxLayout.Instance.Scale = desiredScale;
+            (Layout.Current as StompboxLayout).SetReferenceHeight(height);
 
             if (StompboxClient.Instance.NeedUIReload)
             {

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0-android</TargetFramework>
-    <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
     <OutputType>Exe</OutputType>
     <ApplicationId>com.companyname.StompboxAndroid</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
@@ -21,6 +21,7 @@
     <PackageReference Include="MonoGame.Framework.Android" Version="3.8.4" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\build\stompbox-capi\stompbox-capi.vcxproj" />
     <ProjectReference Include="..\StompboxClient\StompboxRemoteClient\StompboxRemoteClient.csproj" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
@@ -31,4 +32,5 @@
   <Import Project="..\..\Dependencies\UILayout\UILayout\UILayout.projitems" Label="Shared" />
   <Import Project="..\..\Dependencies\UILayout\UILayout.MonoGame\UILayout.MonoGame.projitems" Label="Shared" />
   <Import Project="..\..\Dependencies\UILayout\UILayout.DefaultTextures\UILayout.DefaultTextures.projitems" Label="Shared" />
+  <Import Project="..\StompboxMonoGame\StompboxMonoGame.projitems" Label="Shared" />
 </Project>

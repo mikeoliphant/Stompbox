@@ -63,6 +63,14 @@ namespace Stompbox
             InterfaceBase.SetInterfaceType(InterfaceBase.InterfaceType);
         }
 
+        public void SetReferenceHeight(float height)
+        {
+            float desiredScale = (Layout.Current as MonoGameLayout).UnscaledBounds.Height / height;
+
+            if (StompboxLayout.Instance.Scale != desiredScale)
+                StompboxLayout.Instance.Scale = desiredScale;
+        }
+
         public void Connect()
         {
             clientConnected = false;

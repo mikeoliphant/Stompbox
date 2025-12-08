@@ -52,6 +52,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniPlugins", "MiniPlugins\
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UILayout.DefaultTextures", "..\Dependencies\UILayout\UILayout.DefaultTextures\UILayout.DefaultTextures.shproj", "{9F1A46C4-BC4C-46F7-B10A-1719D53A5FD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StompboxRemoteIot", "StompboxRemoteIot\StompboxRemoteIot.csproj", "{F66ADECA-3357-4561-88D5-C8AD5FE914B6}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UILayout.Skia", "..\..\UILayout\UILayout.Skia\UILayout.Skia.shproj", "{43920506-574A-4227-9759-5C55C3D54A9A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "StompboxMonoGame", "StompboxMonoGame\StompboxMonoGame.shproj", "{E2B7AAED-BEF4-4157-A4B6-10CD85288529}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -261,7 +267,6 @@ Global
 		{D13A3CB1-9948-4942-BDDC-6A5153C9FED9}.RelWithDebInfo|x86.ActiveCfg = Release|Any CPU
 		{D13A3CB1-9948-4942-BDDC-6A5153C9FED9}.RelWithDebInfo|x86.Build.0 = Release|Any CPU
 		{1FF3B5C3-44E2-464A-A15F-55AD4B41CEA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FF3B5C3-44E2-464A-A15F-55AD4B41CEA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF3B5C3-44E2-464A-A15F-55AD4B41CEA0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{1FF3B5C3-44E2-464A-A15F-55AD4B41CEA0}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{1FF3B5C3-44E2-464A-A15F-55AD4B41CEA0}.Debug|x64.Build.0 = Debug|Any CPU
@@ -477,6 +482,30 @@ Global
 		{2EBE19F9-83F1-4209-9189-FD552C959DD7}.RelWithDebInfo|x64.Build.0 = Debug|Any CPU
 		{2EBE19F9-83F1-4209-9189-FD552C959DD7}.RelWithDebInfo|x86.ActiveCfg = Debug|Any CPU
 		{2EBE19F9-83F1-4209-9189-FD552C959DD7}.RelWithDebInfo|x86.Build.0 = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Debug|x64.Build.0 = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Debug|x86.Build.0 = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.MinSizeRel|Any CPU.ActiveCfg = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.MinSizeRel|Any CPU.Build.0 = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.MinSizeRel|x64.ActiveCfg = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.MinSizeRel|x64.Build.0 = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.MinSizeRel|x86.ActiveCfg = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.MinSizeRel|x86.Build.0 = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Release|x64.ActiveCfg = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Release|x64.Build.0 = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Release|x86.ActiveCfg = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.Release|x86.Build.0 = Release|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.RelWithDebInfo|Any CPU.ActiveCfg = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.RelWithDebInfo|Any CPU.Build.0 = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.RelWithDebInfo|x64.ActiveCfg = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.RelWithDebInfo|x64.Build.0 = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.RelWithDebInfo|x86.ActiveCfg = Debug|Any CPU
+		{F66ADECA-3357-4561-88D5-C8AD5FE914B6}.RelWithDebInfo|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -498,15 +527,21 @@ Global
 		..\Dependencies\UILayout\UILayout.DefaultTextures\UILayout.DefaultTextures.projitems*{1ff3b5c3-44e2-464a-a15f-55ad4b41cea0}*SharedItemsImports = 5
 		..\Dependencies\UILayout\UILayout.MonoGame\UILayout.MonoGame.projitems*{1ff3b5c3-44e2-464a-a15f-55ad4b41cea0}*SharedItemsImports = 5
 		..\Dependencies\UILayout\UILayout\UILayout.projitems*{1ff3b5c3-44e2-464a-a15f-55ad4b41cea0}*SharedItemsImports = 5
+		StompboxMonoGame\StompboxMonoGame.projitems*{1ff3b5c3-44e2-464a-a15f-55ad4b41cea0}*SharedItemsImports = 5
 		StompboxShared\StompboxShared.projitems*{1ff3b5c3-44e2-464a-a15f-55ad4b41cea0}*SharedItemsImports = 5
+		StompboxMonoGame\StompboxMonoGame.projitems*{2ebe19f9-83f1-4209-9189-fd552c959dd7}*SharedItemsImports = 5
 		StompboxShared\StompboxShared.projitems*{2ebe19f9-83f1-4209-9189-fd552c959dd7}*SharedItemsImports = 5
+		StompboxMonoGame\StompboxMonoGame.projitems*{428f3d8a-d221-4f75-b1d6-f409b91fb7df}*SharedItemsImports = 5
 		StompboxShared\StompboxShared.projitems*{428f3d8a-d221-4f75-b1d6-f409b91fb7df}*SharedItemsImports = 5
+		..\..\UILayout\UILayout.Skia\UILayout.Skia.projitems*{43920506-574a-4227-9759-5c55c3d54a9a}*SharedItemsImports = 13
+		StompboxMonoGame\StompboxMonoGame.projitems*{49305251-662e-459a-9adf-9866ceb6c4d2}*SharedItemsImports = 5
 		StompboxShared\StompboxShared.projitems*{49305251-662e-459a-9adf-9866ceb6c4d2}*SharedItemsImports = 5
 		StompboxClient\StompboxAPIBase\StompboxAPIBase.projitems*{71c8dc9a-fe7f-516c-5f91-abda855b9d26}*SharedItemsImports = 5
 		..\Dependencies\UILayout\UILayout\UILayout.projitems*{7da2b397-a39f-4e5b-96ed-f206329982c9}*SharedItemsImports = 13
 		..\Dependencies\UILayout\UILayout.DefaultTextures\UILayout.DefaultTextures.projitems*{8f0c191b-da0c-4af6-9e0b-c325d48a1a42}*SharedItemsImports = 5
 		..\Dependencies\UILayout\UILayout.MonoGame\UILayout.MonoGame.projitems*{8f0c191b-da0c-4af6-9e0b-c325d48a1a42}*SharedItemsImports = 5
 		..\Dependencies\UILayout\UILayout\UILayout.projitems*{8f0c191b-da0c-4af6-9e0b-c325d48a1a42}*SharedItemsImports = 5
+		StompboxMonoGame\StompboxMonoGame.projitems*{96f4600b-d3da-4ac3-89ed-67ce6f9c9578}*SharedItemsImports = 5
 		StompboxShared\StompboxShared.projitems*{96f4600b-d3da-4ac3-89ed-67ce6f9c9578}*SharedItemsImports = 5
 		..\Dependencies\UILayout\UILayout.DefaultTextures\UILayout.DefaultTextures.projitems*{9f1a46c4-bc4c-46f7-b10a-1719d53a5fd3}*SharedItemsImports = 13
 		StompboxShared\StompboxShared.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
@@ -516,6 +551,11 @@ Global
 		..\Dependencies\UILayout\UILayout\UILayout.projitems*{d13a3cb1-9948-4942-bddc-6a5153c9fed9}*SharedItemsImports = 5
 		StompboxClient\StompboxAPIBase\StompboxAPIBase.projitems*{d4a1d097-2484-09e2-6932-9a06b16e4370}*SharedItemsImports = 5
 		..\Dependencies\UILayout\UILayout.MonoGame\UILayout.MonoGame.projitems*{d7307594-237f-43da-bd6b-d0bc2bd9b276}*SharedItemsImports = 13
+		StompboxMonoGame\StompboxMonoGame.projitems*{e2b7aaed-bef4-4157-a4b6-10cd85288529}*SharedItemsImports = 13
 		StompboxClient\StompboxAPIBase\StompboxAPIBase.projitems*{ef794465-7976-4ad3-b2cc-dea7a85a80ae}*SharedItemsImports = 13
+		..\Dependencies\UILayout\UILayout.DefaultTextures\UILayout.DefaultTextures.projitems*{f66adeca-3357-4561-88d5-c8ad5fe914b6}*SharedItemsImports = 5
+		..\Dependencies\UILayout\UILayout\UILayout.projitems*{f66adeca-3357-4561-88d5-c8ad5fe914b6}*SharedItemsImports = 5
+		StompboxShared\StompboxShared.projitems*{f66adeca-3357-4561-88d5-c8ad5fe914b6}*SharedItemsImports = 5
+		..\..\UILayout\UILayout.Skia\UILayout.Skia.projitems*{f66adeca-3357-4561-88d5-c8ad5fe914b6}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
