@@ -5,8 +5,6 @@
 #include "architecture.hpp"
 
 #include "PluginProcessor.h"
-#include "AudioFileRecorder.h"
-#include "DefaultPlugins.h"
 
 #ifdef __linux__
 #include <cstdlib>
@@ -68,8 +66,6 @@ PluginProcessor::PluginProcessor(std::filesystem::path dataPath, bool dawMode)
     ScanPresets();
 
     pluginFactory.SetDataPath(dataPath);
-
-    AddDefaultPlugins(pluginFactory);
 
     tmpBuf1 = new float[tmpBufSize];
     tmpBuf2 = new float[tmpBufSize];
@@ -221,12 +217,12 @@ void PluginProcessor::UpdateClient()
 
                     case MIDI_MODE_RECORDER:
                     {
-                        if ((audioFileRecorder != nullptr) && audioFileRecorder->Enabled)
-                        {
-                            float secondsRecorded = audioFileRecorder->GetParameterValue(AUDIOFILERECORDER_SECONDSRECORDED);
+                        //if ((audioFileRecorder != nullptr) && audioFileRecorder->Enabled)
+                        //{
+                        //    float secondsRecorded = audioFileRecorder->GetParameterValue(AUDIOFILERECORDER_SECONDSRECORDED);
 
-                            serialDisplayInterface.UpdateRecordSeconds(secondsRecorded);
-                        }
+                        //    serialDisplayInterface.UpdateRecordSeconds(secondsRecorded);
+                        //}
 
                         break;
                     }
@@ -1369,11 +1365,11 @@ bool PluginProcessor::HandleMidiCommand(int midiCommand, int midiData1, int midi
             case MIDI_MODE_RECORDER:
                 if ((stompCC[2] != -1) && (midiData1 == stompCC[2]))
                 {
-                    if ((audioFileRecorder != nullptr) && audioFileRecorder->Enabled)
-                    {
-                        std::thread saveThread = std::thread(&AudioFileRecorder::SaveRecording, (AudioFileRecorder *)audioFileRecorder);
-                        saveThread.detach();
-                    }
+                    //if ((audioFileRecorder != nullptr) && audioFileRecorder->Enabled)
+                    //{
+                    //    std::thread saveThread = std::thread(&AudioFileRecorder::SaveRecording, (AudioFileRecorder *)audioFileRecorder);
+                    //    saveThread.detach();
+                    //}
                 }
                 break;
             }

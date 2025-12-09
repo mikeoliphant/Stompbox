@@ -10,10 +10,8 @@ endif()
 if(JACK_LIB)
 	message("Jack library found - stombox-jack will be built")
 
-	file(MAKE_DIRECTORY build/stompbox-jack)
-
 	add_custom_target(copy_binaries ALL
-		${CMAKE_COMMAND} -E copy "$<TARGET_FILE:stompbox-jack>" stompbox-jack/
+		${CMAKE_COMMAND} -E copy "$<TARGET_FILE:stompbox-jack>" ./
 		DEPENDS stompbox-jack
 	)
 

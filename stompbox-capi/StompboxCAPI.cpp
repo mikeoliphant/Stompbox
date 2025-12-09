@@ -3,6 +3,7 @@
 #include "PluginProcessor.h"
 #include "StompBox.h"
 #include "StompboxCAPI.h"
+#include "DefaultPlugins.h"
 
 // String vector helpers
 
@@ -22,6 +23,8 @@ const char* GetStringVectorValue(void* strVec, size_t index)
 void* CreateProcessor(const wchar_t* dataPath, bool dawMode)
 {
     PluginProcessor* processor = new PluginProcessor(dataPath, dawMode);
+
+    AddDefaultPlugins(processor->GetPluginFactory());
 
     return (void *)processor;
 }
@@ -79,7 +82,7 @@ const PATH_STR GetDataPath(void* processor)
 
 void* GetAllPlugins(void* processor)
 {
-    return (void *)&(((PluginProcessor*)processor)->GetPluginFactory()->GetAllPlugins());
+    return (void *)&(((PluginProcessor*)processor)->GetPluginFactory().GetAllPlugins());
 }
 
 const char* GetGlobalChain(void* processor)

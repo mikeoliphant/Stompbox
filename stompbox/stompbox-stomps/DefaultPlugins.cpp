@@ -1,6 +1,5 @@
-#pragma once
 
-#include "PluginFactory.h"
+#include "DefaultPlugins.h"
 
 #include "Gain.h"
 #include "GuitarConvolver.h"

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "AudioFile.h"
+#include "dr_wav.h"
 #include "CDSPResampler.h"
 
 WaveReader::WaveReader(const std::string filename, const uint32_t desiredSampleRate)

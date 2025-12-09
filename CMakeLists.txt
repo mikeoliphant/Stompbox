@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(StompBox VERSION 0.0.1)
+project(Stompbox VERSION 0.0.1)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -57,6 +57,10 @@ add_custom_target(copy_library ALL
 	${CMAKE_COMMAND} -E copy "$<TARGET_FILE:stompbox>" stompbox/
 	DEPENDS stompbox
 )
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+	target_compile_definitions(stompbox PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
+endif()
 
 add_subdirectory(stompbox-jack)
 add_subdirectory(stompbox-capi)

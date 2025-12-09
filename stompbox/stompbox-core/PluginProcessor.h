@@ -131,9 +131,9 @@ public:
 		return stompboxServer.HaveClient();
 	}
 
-	PluginFactory* GetPluginFactory()
+	PluginFactory& GetPluginFactory()
 	{
-		return &pluginFactory;
+		return pluginFactory;
 	}
 
 	std::string GetGlobalChain()
