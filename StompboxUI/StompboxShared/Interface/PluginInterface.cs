@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UILayout;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using UILayout;
 
 namespace Stompbox
