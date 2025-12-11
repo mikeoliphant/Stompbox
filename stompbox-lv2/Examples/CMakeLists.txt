@@ -4,14 +4,14 @@ set(SOURCES
 )
 
 set(STOMP_SOURCES
-	../../stompbox/stompbox-stomps/Gain.h
-	../../stompbox/stompbox-stomps/Gain.cpp
+	../../stompbox-stomps/Gain.h
+	../../stompbox-stomps/Gain.cpp
 )
 
 add_library(simple_io SHARED ${SOURCES} ${STOMP_SOURCES})
 
 target_include_directories(simple_io PUBLIC ../Dependencies/lv2/include)
-target_include_directories(simple_io PUBLIC .. ../../stompbox/stompbox-stomps)
+target_include_directories(simple_io PUBLIC .. ../../stompbox-stomps)
 
 target_link_libraries(simple_io PRIVATE stompbox-lv2)
 

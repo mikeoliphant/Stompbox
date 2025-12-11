@@ -49,7 +49,13 @@ endif ()
 
 set(STOMPBOX_DEPS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Dependencies")
 
-add_subdirectory(stompbox)
+add_subdirectory(stompbox-core)
+add_subdirectory(stompbox-stomps)
+
+add_library(stompbox STATIC)
+
+target_link_libraries(stompbox PUBLIC stompbox-core)
+target_link_libraries(stompbox PUBLIC stompbox-stomps)
 
 file(MAKE_DIRECTORY build/stompbox)
 
