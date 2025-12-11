@@ -64,3 +64,4 @@ endif()
 
 add_subdirectory(stompbox-jack)
 add_subdirectory(stompbox-capi)
+add_subdirectory(stompbox-lv2)
