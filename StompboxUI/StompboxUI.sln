@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32126.317
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11304.174 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StompboxImageProcessor", "StompboxImageProcessor\StompboxImageProcessor.csproj", "{30B0161E-88A1-4F41-BC00-9293D6EE09D5}"
 EndProject
@@ -26,10 +26,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UILayout.MonoGame.WindowsDX", "..\Dependencies\UILayout\UILayout.MonoGame.WindowsDX\UILayout.MonoGame.WindowsDX.csproj", "{D13A3CB1-9948-4942-BDDC-6A5153C9FED9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StompboxAndroid", "StompboxAndroid\StompboxAndroid.csproj", "{1FF3B5C3-44E2-464A-A15F-55AD4B41CEA0}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NeuralAudio", "..\build\stompbox\NeuralAudio\NeuralAudio\NeuralAudio.vcxproj", "{D960D48F-DA6E-367F-BB29-820D113DDEA4}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RTNeural", "..\build\stompbox\NeuralAudio\NeuralAudio\RTNeural\RTNeural\RTNeural.vcxproj", "{142DB28F-132A-3441-90BD-87C21EFB8FC3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stompbox", "..\build\stompbox\stompbox.vcxproj", "{AFF0B0F7-7704-3EF3-9971-EC4A425B14D0}"
 EndProject
@@ -290,54 +286,6 @@ Global
 		{1FF3B5C3-44E2-464A-A15F-55AD4B41CEA0}.RelWithDebInfo|x64.Build.0 = Release|Any CPU
 		{1FF3B5C3-44E2-464A-A15F-55AD4B41CEA0}.RelWithDebInfo|x86.ActiveCfg = Release|Any CPU
 		{1FF3B5C3-44E2-464A-A15F-55AD4B41CEA0}.RelWithDebInfo|x86.Build.0 = Release|Any CPU
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Debug|Any CPU.Build.0 = Debug|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Debug|x64.ActiveCfg = Debug|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Debug|x64.Build.0 = Debug|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Debug|x86.ActiveCfg = Debug|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Debug|x86.Build.0 = Debug|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.MinSizeRel|Any CPU.ActiveCfg = MinSizeRel|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.MinSizeRel|Any CPU.Build.0 = MinSizeRel|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.MinSizeRel|x86.ActiveCfg = MinSizeRel|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.MinSizeRel|x86.Build.0 = MinSizeRel|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Release|Any CPU.ActiveCfg = Release|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Release|Any CPU.Build.0 = Release|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Release|x64.ActiveCfg = Release|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Release|x64.Build.0 = Release|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Release|x86.ActiveCfg = Release|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.Release|x86.Build.0 = Release|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.RelWithDebInfo|Any CPU.ActiveCfg = RelWithDebInfo|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.RelWithDebInfo|Any CPU.Build.0 = RelWithDebInfo|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|x64
-		{D960D48F-DA6E-367F-BB29-820D113DDEA4}.RelWithDebInfo|x86.Build.0 = RelWithDebInfo|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Debug|Any CPU.Build.0 = Debug|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Debug|x64.ActiveCfg = Debug|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Debug|x64.Build.0 = Debug|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Debug|x86.ActiveCfg = Debug|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Debug|x86.Build.0 = Debug|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.MinSizeRel|Any CPU.ActiveCfg = MinSizeRel|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.MinSizeRel|Any CPU.Build.0 = MinSizeRel|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.MinSizeRel|x86.ActiveCfg = MinSizeRel|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.MinSizeRel|x86.Build.0 = MinSizeRel|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Release|Any CPU.ActiveCfg = Release|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Release|Any CPU.Build.0 = Release|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Release|x64.ActiveCfg = Release|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Release|x64.Build.0 = Release|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Release|x86.ActiveCfg = Release|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.Release|x86.Build.0 = Release|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.RelWithDebInfo|Any CPU.ActiveCfg = RelWithDebInfo|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.RelWithDebInfo|Any CPU.Build.0 = RelWithDebInfo|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|x64
-		{142DB28F-132A-3441-90BD-87C21EFB8FC3}.RelWithDebInfo|x86.Build.0 = RelWithDebInfo|x64
 		{AFF0B0F7-7704-3EF3-9971-EC4A425B14D0}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{AFF0B0F7-7704-3EF3-9971-EC4A425B14D0}.Debug|Any CPU.Build.0 = Debug|x64
 		{AFF0B0F7-7704-3EF3-9971-EC4A425B14D0}.Debug|x64.ActiveCfg = Debug|x64

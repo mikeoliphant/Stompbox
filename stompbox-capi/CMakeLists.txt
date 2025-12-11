@@ -2,7 +2,7 @@ set(SOURCES StompboxCAPI.h StompboxCAPI.cpp)
 
 add_library(stompbox-capi SHARED ${SOURCES})
 
-include_directories(stompbox-capi ../stompbox/stompbox-stomps ../stompbox/stompbox-core)
+include_directories(stompbox-capi ../stompbox-stomps ../stompbox-core)
 
 target_link_libraries(stompbox-capi PRIVATE $<LINK_LIBRARY:WHOLE_ARCHIVE,stompbox>)
 

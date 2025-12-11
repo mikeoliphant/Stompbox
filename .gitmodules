@@ -14,3 +14,6 @@
 	path = Dependencies/NeuralAudio
 	url = https://github.com/mikeoliphant/NeuralAudio
 
+[submodule "stompbox-lv2/Dependencies/lv2"]
+	path = stompbox-lv2/Dependencies/lv2
+	url = https://github.com/lv2/lv2
