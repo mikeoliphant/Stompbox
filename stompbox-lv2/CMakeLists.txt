@@ -6,6 +6,8 @@ set(SOURCES
 
 add_library(stompbox-lv2 STATIC ${SOURCES})
 
+set_property(TARGET stompbox-lv2 PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 target_include_directories(stompbox-lv2 PUBLIC ../stompbox-core)
 target_include_directories(stompbox-lv2 PUBLIC Dependencies/lv2/include)
 
