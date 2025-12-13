@@ -10,6 +10,8 @@ set(STOMP_SOURCES
 
 add_library(simple_io SHARED ${SOURCES} ${STOMP_SOURCES})
 
+set_property(TARGET simple_io PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 target_include_directories(simple_io PUBLIC ../Dependencies/lv2/include)
 target_include_directories(simple_io PUBLIC .. ../../stompbox-stomps)
 

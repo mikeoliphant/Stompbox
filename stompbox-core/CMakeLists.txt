@@ -5,6 +5,8 @@ set(OTHER_SOURCES "${STOMPBOX_DEPS_PATH}/r8brain-free-src/r8bbase.cpp"
 
 add_library(stompbox-core OBJECT ${SOURCES} ${OTHER_SOURCES})
 
+set_property(TARGET stompbox-core PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 target_include_directories(stompbox-core SYSTEM PUBLIC ${STOMPBOX_DEPS_PATH}/denormal)
 target_include_directories(stompbox-core SYSTEM PUBLIC ${STOMPBOX_DEPS_PATH}/dr_libs)
 target_include_directories(stompbox-core SYSTEM PUBLIC ${STOMPBOX_DEPS_PATH}/r8brain-free-src)
