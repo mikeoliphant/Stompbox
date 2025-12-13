@@ -54,6 +54,6 @@ class SimpleIOPluginFactory : public StompboxLV2PluginFactory
 	public:
 		SimpleIOPluginFactory()
 		{
-			AddPlugin<SimpleIOPlugin>("https://github.com/mikeoliphant/Stompbox/simple_io");
+			AddPlugin<SimpleIOPlugin>("https://github.com/mikeoliphant/simple_io");
 		}
 };
