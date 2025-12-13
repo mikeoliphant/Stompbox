@@ -52,22 +52,6 @@ set(STOMPBOX_DEPS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Dependencies")
 add_subdirectory(stompbox-core)
 add_subdirectory(stompbox-stomps)
 
-add_library(stompbox STATIC)
-
-target_link_libraries(stompbox PUBLIC stompbox-core)
-target_link_libraries(stompbox PUBLIC stompbox-stomps)
-
-file(MAKE_DIRECTORY build/stompbox)
-
-add_custom_target(copy_library ALL
-	${CMAKE_COMMAND} -E copy "$<TARGET_FILE:stompbox>" stompbox/
-	DEPENDS stompbox
-)
-
-if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
-	target_compile_definitions(stompbox PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
-endif()
-
 add_subdirectory(stompbox-jack)
 add_subdirectory(stompbox-capi)
 add_subdirectory(stompbox-lv2)
