@@ -18,7 +18,11 @@ extern const void* extension_data(const char* uri);
 template<typename T>
 static LV2_Handle instantiate(const LV2_Descriptor*, double rate, const char*, const LV2_Feature* const* features)
 {
-	return static_cast<LV2_Handle>(new T());
+	auto plugin = new T();
+
+	plugin->Init(rate);
+
+	return static_cast<LV2_Handle>(plugin);
 }
 
 class StompboxLV2Port
@@ -97,6 +101,11 @@ public:
 	}
 
 	virtual ~StompboxLV2Plugin() {};
+
+	void Init(float sampleRate)
+	{
+		processor.Init(sampleRate);
+	}
 
 	void AddPort(StompboxLV2Port& port)
 	{

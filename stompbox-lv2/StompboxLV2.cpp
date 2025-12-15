@@ -11,11 +11,6 @@ void connect_port(LV2_Handle instance, uint32_t port, void* data)
 	plugin->SetPortDataPtr(port, data);
 }
 
-LV2_Handle instantiate(const LV2_Descriptor*, double rate, const char*, const LV2_Feature* const* features)
-{
-	return (LV2_Handle)43;
-}
-
 void activate(LV2_Handle) {}
 
 void run(LV2_Handle instance, uint32_t n_samples)
