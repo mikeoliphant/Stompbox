@@ -126,12 +126,12 @@ public:
 
 	protected:
 		PluginProcessor processor;
-
-	private:
 		StompboxLV2AtomPort controlAtomPort;
 		StompboxLV2AudioPort inputAudioPort;
 		StompboxLV2AudioPort outputAudioPort;
 		std::vector<StompboxLV2Port*> ports;
+
+	private:
 };
 
 class StompboxLV2PluginFactory
