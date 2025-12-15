@@ -12,7 +12,7 @@ enum
 class Gain : public StompBox
 {
 private:
-	float gain;
+	float gain = 0;
 	float minGain;
 	float maxGain;
 	float linearGain;

@@ -24,7 +24,7 @@ if(JACK_LIB)
 	include_directories(stompbox-jack ${STOMPBOX_DEPS_PATH}/denormal)
 	include_directories(stompbox-jack ../stompbox/Stomps)
 
-	target_link_libraries(stompbox-jack PUBLIC ${JACK_LIB} PRIVATE stompbox)
+	target_link_libraries(stompbox-jack PUBLIC ${JACK_LIB} PRIVATE stompbox-core stompbox-stomps)
 
 	target_compile_features(stompbox-jack PUBLIC cxx_std_17)
 
@@ -37,7 +37,6 @@ if(JACK_LIB)
 
 	if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 		include_directories(stompbox-jack C:/Program\ Files/JACK2/include)
-		target_compile_definitions(stompbox-jack PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
 	endif()
 
 	if (MSVC)
