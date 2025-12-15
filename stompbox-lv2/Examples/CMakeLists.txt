@@ -14,6 +14,11 @@ add_library(simple_io SHARED ${SOURCES} ${STOMP_SOURCES})
 
 set_property(TARGET simple_io PROPERTY POSITION_INDEPENDENT_CODE ON)
 
+set_target_properties(simple_io
+	PROPERTIES
+	PREFIX ""
+)
+
 target_include_directories(simple_io PUBLIC ../Dependencies/lv2/include)
 target_include_directories(simple_io PUBLIC .. ../../stompbox-stomps)
 
