@@ -12,6 +12,8 @@
 
 #include "PluginProcessor.h"
 #include "SysExMapper.h"
+#include "DefaultPlugins.h"
+
 
 jack_port_t **input_ports;
 jack_port_t **output_ports;
@@ -260,6 +262,9 @@ int main(int argc, char* argv[])
     //midi_output_port = jack_port_register(client, "midi_out", JACK_DEFAULT_MIDI_TYPE, JackPortIsOutput, 0);
 
     guitarProcessor = new PluginProcessor(std::filesystem::current_path(), false);
+
+    AddDefaultPlugins(guitarProcessor->GetPluginFactory());
+
     guitarProcessor->Init((float)jack_get_sample_rate(client));
 
     guitarProcessor->HandleCommand("SetGlobalChain MasterChain MasterIn Chain Input Slot Amp Slot Tonestack Chain FxLoop Slot Cabinet Chain Output MasterChain MasterOut");

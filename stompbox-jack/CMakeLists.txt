@@ -22,7 +22,7 @@ if(JACK_LIB)
 	include_directories(stompbox-jack ${STOMPBOX_DEPS_PATH}/NeuralAmpModelerCore/NAM)
 	include_directories(stompbox-jack ${STOMPBOX_DEPS_PATH}/json)
 	include_directories(stompbox-jack ${STOMPBOX_DEPS_PATH}/denormal)
-	include_directories(stompbox-jack ../stompbox/Stomps)
+	include_directories(stompbox-jack ../stompbox-stomps)
 
 	target_link_libraries(stompbox-jack PUBLIC ${JACK_LIB} PRIVATE stompbox-core stompbox-stomps)
 
