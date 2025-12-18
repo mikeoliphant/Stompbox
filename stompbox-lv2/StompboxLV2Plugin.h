@@ -20,7 +20,7 @@ static LV2_Handle instantiate(const LV2_Descriptor*, double rate, const char*, c
 {
 	auto plugin = new T();
 
-	plugin->Init(rate);
+	plugin->Init((float)rate);
 
 	return static_cast<LV2_Handle>(plugin);
 }
@@ -69,6 +69,11 @@ class StompboxLV2ControlPort : public StompboxLV2Port
 			SetParameter(param);
 		}
 
+		float *GetDataPtr()
+		{
+			return static_cast<float*>(dataPtr);
+		}
+
 		void SetParameter(StompBoxParameter* param)
 		{
 			this->parameter = param;
@@ -76,7 +81,7 @@ class StompboxLV2ControlPort : public StompboxLV2Port
 
 		void Update() override
 		{
-			if (dataPtr != nullptr)
+			if ((dataPtr != nullptr) && (parameter != nullptr))
 			{
 				parameter->SetValue(*(static_cast<float*>(dataPtr)));
 			}
