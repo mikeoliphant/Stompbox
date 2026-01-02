@@ -112,10 +112,6 @@ void PluginProcessor::Init(float newSampleRate)
     }
 
     initialized = true;
-
-    fprintf(stderr, "Starting client update thread\n");
-
-    clientUpdateThread = new std::thread(&PluginProcessor::UpdateClient, this);
 }
 
 void PluginProcessor::SetMaxAudioBufferSize(size_t numSamples)
@@ -148,6 +144,10 @@ void PluginProcessor::SetBPM(float newBpm)
 
 void PluginProcessor::StartServer()
 {
+    fprintf(stderr, "Starting client update thread\n");
+
+    clientUpdateThread = new std::thread(&PluginProcessor::UpdateClient, this);
+
     stompboxServer.SetLineCallback([this](std::string line) { return HandleCommand(line); });
     stompboxServer.Start();
 
