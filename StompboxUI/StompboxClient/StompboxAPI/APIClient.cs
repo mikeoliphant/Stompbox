@@ -56,7 +56,7 @@ namespace StompboxAPI
                 Directory.CreateDirectory(PluginPath);
             }
 
-            processor = new StompboxProcessor(PluginPath, dawMode: true);
+            processor = new StompboxProcessor(PluginPath);
 
             InClientMode = false;
 

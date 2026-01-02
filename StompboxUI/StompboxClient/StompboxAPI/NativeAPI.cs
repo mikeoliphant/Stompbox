@@ -18,7 +18,7 @@ namespace StompboxAPI
         public static extern IntPtr GetStringVectorValue(IntPtr strVec, uint index);
 
         [DllImport(STOMPBOX_LIB_NAME)]
-        public static extern IntPtr CreateProcessor([MarshalAs(UnmanagedType.LPWStr)] string dataPath, bool dawMode);
+        public static extern IntPtr CreateProcessor([MarshalAs(UnmanagedType.LPWStr)] string dataPath);
 
         [DllImport(STOMPBOX_LIB_NAME)]
         public static extern void DeleteProcessor(IntPtr processor);

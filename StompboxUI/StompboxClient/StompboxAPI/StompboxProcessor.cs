@@ -9,9 +9,9 @@ namespace StompboxAPI
 
         public string DataPath { get { return NativeApi.GetDataPath(nativeProcessor); } }
 
-        public StompboxProcessor(string dataPath, bool dawMode)
+        public StompboxProcessor(string dataPath)
         {
-            nativeProcessor = NativeApi.CreateProcessor(dataPath, dawMode);
+            nativeProcessor = NativeApi.CreateProcessor(dataPath);
         }
 
         public void Init(float sampleRate)
