@@ -18,12 +18,6 @@
 
 #include "NeuralAudio/NeuralModel.h"
 
-enum
-{
-	NAM_MODEL,
-	NAM_NUMPARAMETERS
-};
-
 class NAMLoader : public FileLoader<NeuralAudio::NeuralModel>
 {
 protected:
@@ -52,7 +46,7 @@ public:
 
 	NAM(const std::string folderName, const std::vector<std::string> fileExtensions, const std::filesystem::path& basePath);
 	virtual ~NAM() {}
-	virtual void init(int samplingFreq);
-	void SetParameterValue(StompBoxParameter* parameter, float value);
-	virtual void compute(int count, float* input, float* output);
+	virtual void init(int samplingFreq) override;
+	void SetParameterValue(StompBoxParameter& parameter, float value) override;
+	virtual void compute(int count, float* input, float* output) override;
 };

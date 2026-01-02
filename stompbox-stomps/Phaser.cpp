@@ -20,41 +20,44 @@ Phaser::Phaser()
 	fratio = 1.5f;
 	frqwidth = 0.3f;
 	
-	NumParameters = PHASER_NUMPARAMETERS;
-	CreateParameters(NumParameters);
-	Parameters[PHASER_SPEED].Name = "Speed";
-	Parameters[PHASER_SPEED].MaxValue = 10;
-	Parameters[PHASER_SPEED].SourceVariable = &freq;
-	Parameters[PHASER_SPEED].DefaultValue = freq;
-	Parameters[PHASER_SPEED].Description = "Rate of phaser sweep";
+	auto& speedParam = AddParameter();
+	speedParam.Name = "Speed";
+	speedParam.MaxValue = 10;
+	speedParam.SourceVariable = &freq;
+	speedParam.DefaultValue = freq;
+	speedParam.Description = "Rate of phaser sweep";
 
-	Parameters[PHASER_DEPTH].Name = "Depth";
-	Parameters[PHASER_DEPTH].MaxValue = 0.5;
-	Parameters[PHASER_DEPTH].SourceVariable = &depth;
-	Parameters[PHASER_DEPTH].DefaultValue = depth;
-	Parameters[PHASER_DEPTH].Description = "Strength of phaser effect";
+	auto& depthParam = AddParameter();
+	depthParam.Name = "Depth";
+	depthParam.MaxValue = 0.5;
+	depthParam.SourceVariable = &depth;
+	depthParam.DefaultValue = depth;
+	depthParam.Description = "Strength of phaser effect";
 
-	Parameters[PHASER_FREQWIDTH].Name = "FrqWidth";
-	Parameters[PHASER_FREQWIDTH].SourceVariable = &frqwidth;
-	Parameters[PHASER_FREQWIDTH].DefaultValue = frqwidth;
-	Parameters[PHASER_FREQWIDTH].IsAdvanced = true;
-	Parameters[PHASER_FREQWIDTH].Description = "Frequency width of phaser sweep";
+	auto& widthParam = AddParameter();
+	widthParam.Name = "FrqWidth";
+	widthParam.SourceVariable = &frqwidth;
+	widthParam.DefaultValue = frqwidth;
+	widthParam.IsAdvanced = true;
+	widthParam.Description = "Frequency width of phaser sweep";
 
-	Parameters[PHASER_RATIO].Name = "Ratio";
-	Parameters[PHASER_RATIO].MinValue = 1.1f;
-	Parameters[PHASER_RATIO].MaxValue = 4;
-	Parameters[PHASER_RATIO].SourceVariable = &fratio;
-	Parameters[PHASER_RATIO].DefaultValue = fratio;
-	Parameters[PHASER_RATIO].IsAdvanced = true;
-	Parameters[PHASER_RATIO].Description = "Phaser frequency ratio";
+	auto& ratioParam = AddParameter();
+	ratioParam.Name = "Ratio";
+	ratioParam.MinValue = 1.1f;
+	ratioParam.MaxValue = 4;
+	ratioParam.SourceVariable = &fratio;
+	ratioParam.DefaultValue = fratio;
+	ratioParam.IsAdvanced = true;
+	ratioParam.Description = "Phaser frequency ratio";
 
-	Parameters[PHASER_FEEDBACK].Name = "FBack";
-	Parameters[PHASER_FEEDBACK].MinValue = 0;
-	Parameters[PHASER_FEEDBACK].MaxValue = 1;
-	Parameters[PHASER_FEEDBACK].SourceVariable = &fb;
-	Parameters[PHASER_FEEDBACK].DefaultValue = fb;
-	Parameters[PHASER_FEEDBACK].IsAdvanced = true;
-	Parameters[PHASER_FEEDBACK].Description = "Amount of phased signal feed back";
+	auto& feedbackParam = AddParameter();
+	feedbackParam.Name = "FBack";
+	feedbackParam.MinValue = 0;
+	feedbackParam.MaxValue = 1;
+	feedbackParam.SourceVariable = &fb;
+	feedbackParam.DefaultValue = fb;
+	feedbackParam.IsAdvanced = true;
+	feedbackParam.Description = "Amount of phased signal feed back";
 }
 
 void Phaser::init(int samplingFreq)

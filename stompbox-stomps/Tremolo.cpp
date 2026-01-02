@@ -7,33 +7,34 @@ Tremolo::Tremolo()
 	Name = "Tremolo";
 	Description = "Tremolo (volume modulation) effect";
 
-	NumParameters = TREMOLO_NUMPARAMETERS;
-	CreateParameters(NumParameters);
-
 	speed = 5;
-	Parameters[TREMOLO_SPEED].Name = "Speed";
-	Parameters[TREMOLO_SPEED].SourceVariable = &speed;
-	Parameters[TREMOLO_SPEED].MinValue = 1;
-	Parameters[TREMOLO_SPEED].MaxValue = 20;
-	Parameters[TREMOLO_SPEED].Step = 0.1f;
-	Parameters[TREMOLO_SPEED].DefaultValue = speed;
-	Parameters[TREMOLO_SPEED].DisplayFormat = "{0:0.0}hz";
-	Parameters[TREMOLO_SPEED].Description = "Modulation speed";
-
 	depth = 0.8f;
-	Parameters[TREMOLO_DEPTH].Name = "Depth";
+	shape = 0.5;
+
+	auto& speedParam = AddParameter();
+	speedParam.Name = "Speed";
+	speedParam.SourceVariable = &speed;
+	speedParam.MinValue = 1;
+	speedParam.MaxValue = 20;
+	speedParam.Step = 0.1f;
+	speedParam.DefaultValue = speed;
+	speedParam.DisplayFormat = "{0:0.0}hz";
+	speedParam.Description = "Modulation speed";
+
+	auto& depthParam = AddParameter();
+	depthParam.Name = "Depth";
 	//Parameters[TREMOLO_DEPTH].MinValue = -12;
 	//Parameters[TREMOLO_DEPTH].MaxValue = 0;
-	Parameters[TREMOLO_DEPTH].DefaultValue = depth;
-	Parameters[TREMOLO_DEPTH].SourceVariable = &depth;
-	Parameters[TREMOLO_DEPTH].Description = "Amount of modulation volume variance";
+	depthParam.DefaultValue = depth;
+	depthParam.SourceVariable = &depth;
+	depthParam.Description = "Amount of modulation volume variance";
 
-	shape = 0.5;
-	Parameters[TREMOLO_SHAPE].Name = "Shape";
-	Parameters[TREMOLO_SHAPE].MinValue = .05f;
-	Parameters[TREMOLO_SHAPE].DefaultValue = shape;
-	Parameters[TREMOLO_SHAPE].SourceVariable = &shape;
-	Parameters[TREMOLO_SHAPE].Description = "Smooth vs squared modulation shape";
+	auto& shapeParam = AddParameter();
+	shapeParam.Name = "Shape";
+	shapeParam.MinValue = .05f;
+	shapeParam.DefaultValue = shape;
+	shapeParam.SourceVariable = &shape;
+	shapeParam.Description = "Smooth vs squared modulation shape";
 }
 
 void Tremolo::init(int samplingFreq)

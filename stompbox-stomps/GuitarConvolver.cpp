@@ -8,28 +8,28 @@ GuitarConvolver::GuitarConvolver(const std::string folderName, const std::vector
     Name = "Cabinet";
     Description = "Cabinet impulse response playback";
 
-    NumParameters = CONVOLVER_NUMPARAMETERS;
-    CreateParameters(NumParameters);
+    auto& impulseParam = AddParameter();
+    impulseParam.Name = "Impulse";
+    impulseParam.SourceVariable = &impulseIndex;
+    impulseParam.ParameterType = PARAMETER_TYPE_FILE;
+    impulseParam.FilePath = "Cabinets";
+    impulseParam.EnumValues = &fileType.GetFileNames();
+    impulseParam.DefaultValue = -1;
+    impulseParam.Description = "Selected impulse response";
+    impulseParam.MinValue = -1;
+    impulseParam.MaxValue = (float)(fileType.GetFileNames().size()) - 1;
 
-    Parameters[CONVOLVER_IMPULSE].Name = "Impulse";
-    Parameters[CONVOLVER_IMPULSE].SourceVariable = &impulseIndex;
-    Parameters[CONVOLVER_IMPULSE].ParameterType = PARAMETER_TYPE_FILE;
-    Parameters[CONVOLVER_IMPULSE].FilePath = "Cabinets";
-    Parameters[CONVOLVER_IMPULSE].EnumValues = &fileType.GetFileNames();
-    Parameters[CONVOLVER_IMPULSE].DefaultValue = -1;
-    Parameters[CONVOLVER_IMPULSE].Description = "Selected impulse response";
-    Parameters[CONVOLVER_IMPULSE].MinValue = -1;
-    Parameters[CONVOLVER_IMPULSE].MaxValue = (float)(fileType.GetFileNames().size()) - 1;
+    auto& dryParam = AddParameter();
+    dryParam.Name = "Dry";
+    dryParam.SourceVariable = &dry;
+    dryParam.DefaultValue = 0;
+    dryParam.Description = "Strength of original signal";
 
-    Parameters[CONVOLVER_DRY].Name = "Dry";
-    Parameters[CONVOLVER_DRY].SourceVariable = &dry;
-    Parameters[CONVOLVER_DRY].DefaultValue = 0;
-    Parameters[CONVOLVER_DRY].Description = "Strength of original signal";
-
-    Parameters[CONVOLVER_WET].Name = "Wet";
-    Parameters[CONVOLVER_WET].SourceVariable = &wet;
-    Parameters[CONVOLVER_WET].DefaultValue = 1;
-    Parameters[CONVOLVER_WET].Description = "Strength of impulse response output";
+    auto& wetParam = AddParameter();
+    wetParam.Name = "Wet";
+    wetParam.SourceVariable = &wet;
+    wetParam.DefaultValue = 1;
+    wetParam.Description = "Strength of impulse response output";
 }
 
 void GuitarConvolver::init(int samplingFreq)
@@ -39,11 +39,11 @@ void GuitarConvolver::init(int samplingFreq)
     irLoader.SetSampleRate(samplingFreq);
 }
 
-void GuitarConvolver::SetParameterValue(StompBoxParameter *parameter, float value)
+void GuitarConvolver::SetParameterValue(StompBoxParameter &parameter, float value)
 {
     StompBox::SetParameterValue(parameter, value);
 
-    if (parameter == &Parameters[CONVOLVER_IMPULSE])
+    if (parameter.Name == "Impulse")
     {
         irLoader.LoadIndex((int)impulseIndex);
     }

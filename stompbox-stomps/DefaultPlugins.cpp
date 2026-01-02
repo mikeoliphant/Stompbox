@@ -39,7 +39,7 @@ StompBox* CreateMasterVolumePlugin(PluginFactory& factory)
 {
 	Gain* master = new Gain(0, -40, 40);
 
-	master->Parameters[GAIN_GAIN].Name = "Volume";
+	master->GetParameter("Gain")->Name = "Volume";
 
 	master->IsUserSelectable = false;
 
@@ -66,9 +66,9 @@ StompBox* CreateConvolutionReverbPlugin(PluginFactory& factory)
 	GuitarConvolver* reverb = new GuitarConvolver("Reverb", { ".wav" }, factory.GetDataPath());
 	reverb->Description = "Convolution reverb (impulse response)";
 
-	reverb->GetParameter(CONVOLVER_DRY)->SetValue(1);
-	reverb->GetParameter(CONVOLVER_WET)->SetValue(0.3f);
-	reverb->GetParameter(CONVOLVER_WET)->DefaultValue = 0.3f;
+	reverb->GetParameter("Dry")->SetValue(1);
+	reverb->GetParameter("Wet")->SetValue(0.3f);
+	reverb->GetParameter("Wet")->DefaultValue = 0.3f;
 
 	reverb->SetMaxIRSamples(-1);
 	reverb->SetIREpsilon(0);
@@ -99,7 +99,7 @@ StompBox* CreateLevelPlugin(PluginFactory& factory)
 {
 	Gain* level = new Gain(0, -40, 40);
 
-	level->Parameters[GAIN_GAIN].Name = "Volume";
+	level->GetParameter("Gain")->Name = "Volume";
 
 	return level;
 }

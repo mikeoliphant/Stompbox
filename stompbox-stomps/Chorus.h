@@ -4,16 +4,6 @@
 
 namespace chorus
 {
-
-
-	enum
-	{
-		//CHORUS_LEVEL,
-		CHORUS_RATE,
-		CHORUS_DEPTH,
-		CHORUS_NUMPARAMETERS
-	};
-
 	class mydspSIG0 {
 
 	private:

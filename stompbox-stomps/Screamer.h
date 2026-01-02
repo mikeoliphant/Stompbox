@@ -2,14 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	SCREAMER_DRIVE,
-	SCREAMER_TONE,
-	SCREAMER_LEVEL,
-	SCREAMER_NUMPARAMETERS
-};
-
 class TS9 : public StompBox
 {
 private:

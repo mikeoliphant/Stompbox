@@ -12,28 +12,28 @@ Flanger::Flanger()
 	fHslider1 = FAUSTFLOAT(0.5);
 	fHslider2 = FAUSTFLOAT(0.20000000000000001);
 
-	NumParameters = FLANGER_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& rateParam = AddParameter();
+	rateParam.Name = "Rate";
+	rateParam.MaxValue = 5;
+	rateParam.SourceVariable = &fHslider2;
+	rateParam.DefaultValue = fHslider2;
+	rateParam.Description = "Rate of frequency modulation";
 
-	Parameters[FLANGER_RATE].Name = "Rate";
-	Parameters[FLANGER_RATE].MaxValue = 5;
-	Parameters[FLANGER_RATE].SourceVariable = &fHslider2;
-	Parameters[FLANGER_RATE].DefaultValue = fHslider2;
-	Parameters[FLANGER_RATE].Description = "Rate of frequency modulation";
+	auto& depthParam = AddParameter();
+	depthParam.Name = "Depth";
+	depthParam.MinValue = 0;
+	depthParam.MaxValue = 1;
+	depthParam.SourceVariable = &fHslider0;
+	depthParam.DefaultValue = fHslider0;
+	depthParam.Description = "Strength of frequency modulation";
 
-	Parameters[FLANGER_DEPTH].Name = "Depth";
-	Parameters[FLANGER_DEPTH].MinValue = 0;
-	Parameters[FLANGER_DEPTH].MaxValue = 1;
-	Parameters[FLANGER_DEPTH].SourceVariable = &fHslider0;
-	Parameters[FLANGER_DEPTH].DefaultValue = fHslider0;
-	Parameters[FLANGER_DEPTH].Description = "Strength of frequency modulation";
-
-	Parameters[FLANGER_FEEDBACK].Name = "FBack";
-	Parameters[FLANGER_FEEDBACK].MinValue = 0;
-	Parameters[FLANGER_FEEDBACK].MaxValue = 1;
-	Parameters[FLANGER_FEEDBACK].SourceVariable = &fHslider1;
-	Parameters[FLANGER_FEEDBACK].DefaultValue = fHslider1;
-	Parameters[FLANGER_FEEDBACK].Description = "System feedback level";
+	auto& feedbackParam = AddParameter();
+	feedbackParam.Name = "FBack";
+	feedbackParam.MinValue = 0;
+	feedbackParam.MaxValue = 1;
+	feedbackParam.SourceVariable = &fHslider1;
+	feedbackParam.DefaultValue = fHslider1;
+	feedbackParam.Description = "System feedback level";
 }
 
 void Flanger::init(int samplingFreq)

@@ -2,15 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	REVERB_ROOMSIZE,
-	REVERB_DECAY,
-	REVERB_WETDRY,
-	REVERB_NUMPARAMETERS
-};
-
-
 class FreeVerb : public StompBox
 {
 private:

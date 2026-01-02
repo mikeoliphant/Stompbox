@@ -5,44 +5,45 @@ AudioFilePlayer::AudioFilePlayer(const std::string folderName, const std::vector
 {
 	Name = "AudioFilePlayer";
 
-	NumParameters = AUDIOFILEPLAYER_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& fileParam = AddParameter();
+	fileParam.Name = "File";
+	fileParam.SourceVariable = &fileIndex;
+	fileParam.ParameterType = PARAMETER_TYPE_FILE;
+	fileParam.DefaultValue = -1;
+	fileParam.FilePath = fileType.GetFolderName();
+	fileParam.EnumValues = &fileType.GetFileNames();
+	fileParam.MinValue = -1;
+	fileParam.MaxValue = (float)(fileType.GetFileNames().size()) - 1;
 
-	Parameters[AUDIOFILEPLAYER_FILE].Name = "File";
-	Parameters[AUDIOFILEPLAYER_FILE].SourceVariable = &fileIndex;
-	Parameters[AUDIOFILEPLAYER_FILE].ParameterType = PARAMETER_TYPE_FILE;
-	Parameters[AUDIOFILEPLAYER_FILE].DefaultValue = -1;
-	Parameters[AUDIOFILEPLAYER_FILE].FilePath = fileType.GetFolderName();
-	Parameters[AUDIOFILEPLAYER_FILE].EnumValues = &fileType.GetFileNames();
-	Parameters[AUDIOFILEPLAYER_FILE].MinValue = -1;
-	Parameters[AUDIOFILEPLAYER_FILE].MaxValue = (float)(fileType.GetFileNames().size()) - 1;
+	auto& levelParam = AddParameter();
+	levelParam.Name = "Level";
+	levelParam.SourceVariable = &level;
+	levelParam.MaxValue = 1.5;
+	levelParam.DefaultValue = level;
 
-	Parameters[AUDIOFILEPLAYER_LEVEL].Name = "Level";
-	Parameters[AUDIOFILEPLAYER_LEVEL].SourceVariable = &level;
-	Parameters[AUDIOFILEPLAYER_LEVEL].MaxValue = 1.5;
-	Parameters[AUDIOFILEPLAYER_LEVEL].DefaultValue = level;
+	auto& playingParam = AddParameter();
+	playingParam.Name = "Playing";
+	playingParam.ParameterType = PARAMETER_TYPE_BOOL;
+	playingParam.SourceVariable = &playing;
+	playingParam.DefaultValue = playing;
+	playingParam.SuppressSave = true;
 
-	Parameters[AUDIOFILEPLAYER_PLAYING].Name = "Playing";
-	Parameters[AUDIOFILEPLAYER_PLAYING].ParameterType = PARAMETER_TYPE_BOOL;
-	Parameters[AUDIOFILEPLAYER_PLAYING].SourceVariable = &playing;
-	Parameters[AUDIOFILEPLAYER_PLAYING].DefaultValue = playing;
-	Parameters[AUDIOFILEPLAYER_PLAYING].SuppressSave = true;
-
-	Parameters[AUDIOFILEPLAYER_POSITION].Name = "Position";
-	Parameters[AUDIOFILEPLAYER_POSITION].SourceVariable = &position;
-	Parameters[AUDIOFILEPLAYER_POSITION].DefaultValue = position;
-	Parameters[AUDIOFILEPLAYER_POSITION].SuppressSave = true;
+	auto& positionParam = AddParameter();
+	positionParam.Name = "Position";
+	positionParam.SourceVariable = &position;
+	positionParam.DefaultValue = position;
+	positionParam.SuppressSave = true;
 }
 
-void AudioFilePlayer::SetParameterValue(StompBoxParameter* param, float value)
+void AudioFilePlayer::SetParameterValue(StompBoxParameter& param, float value)
 {
 	StompBox::SetParameterValue(param, value);
 
-	if (param == &Parameters[AUDIOFILEPLAYER_FILE])
+	if (param.Name == "File")
 	{
 		needWaveLoad = true;
 	}
-	else if (param == &Parameters[AUDIOFILEPLAYER_POSITION])
+	else if (param.Name == "Position")
 	{
 		if (waveReader)
 		{

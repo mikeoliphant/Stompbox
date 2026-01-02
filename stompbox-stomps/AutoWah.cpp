@@ -15,12 +15,11 @@ AutoWah::AutoWah()
 
 	fVslider0 = FAUSTFLOAT(0.5);
 
-	NumParameters = AUTOWAH_NUMPARAMETERS;
-	CreateParameters(NumParameters);
-	Parameters[AUTOWAH_LEVEL].Name = "Level";
-	Parameters[AUTOWAH_LEVEL].DefaultValue = fVslider0;
-	Parameters[AUTOWAH_LEVEL].SourceVariable = &fVslider0;
-	Parameters[AUTOWAH_LEVEL].Description = "Wah effect strength";
+	auto& levelParam = AddParameter();
+	levelParam.Name = "Level";
+	levelParam.DefaultValue = fVslider0;
+	levelParam.SourceVariable = &fVslider0;
+	levelParam.Description = "Wah effect strength";
 }
 
 void AutoWah::init(int newSamplingFreq)

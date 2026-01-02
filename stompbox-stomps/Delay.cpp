@@ -20,45 +20,47 @@ Delay::Delay()
 	warmth = 0.5;
 	hilo = 0.5;
 
-	NumParameters = DELAY_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& delayParam = AddParameter();
+	delayParam.Name = "Delay";
+	delayParam.MinValue = 1;
+	delayParam.MaxValue = 1000;
+	delayParam.SourceVariable = &delay;
+	delayParam.DefaultValue = delay;
+	delayParam.CanSyncToHostBPM = true;
+	delayParam.DisplayFormat = "{0:0}ms";
+	delayParam.Description = "Delay time";
 
-	Parameters[DELAY_DELAY].Name = "Delay";
-	Parameters[DELAY_DELAY].MinValue = 1;
-	Parameters[DELAY_DELAY].MaxValue = 1000;
-	Parameters[DELAY_DELAY].SourceVariable = &delay;
-	Parameters[DELAY_DELAY].DefaultValue = delay;
-	Parameters[DELAY_DELAY].CanSyncToHostBPM = true;
-	Parameters[DELAY_DELAY].DisplayFormat = "{0:0}ms";
-	Parameters[DELAY_DELAY].Description = "Delay time";
+	auto& levelParam = AddParameter();
+	levelParam.Name = "Mix";
+	levelParam.MinValue = 0;
+	levelParam.MaxValue = 1.2f;
+	levelParam.SourceVariable = &wet;
+	levelParam.DefaultValue = wet;
+	levelParam.Description = "Delay volume";
 
-	Parameters[DELAY_LEVEL].Name = "Mix";
-	Parameters[DELAY_LEVEL].MinValue = 0;
-	Parameters[DELAY_LEVEL].MaxValue = 1.2f;
-	Parameters[DELAY_LEVEL].SourceVariable = &wet;
-	Parameters[DELAY_LEVEL].DefaultValue = wet;
-	Parameters[DELAY_LEVEL].Description = "Delay volume";
+	auto& feedbackParam = AddParameter();
+	feedbackParam.Name = "FBack";
+	feedbackParam.MinValue = 0;
+	feedbackParam.MaxValue = 1;
+	feedbackParam.SourceVariable = &feedback;
+	feedbackParam.DefaultValue = feedback;
+	feedbackParam.Description = "Amount of delay decay";
 
-	Parameters[DELAY_FEEDBACK].Name = "FBack";
-	Parameters[DELAY_FEEDBACK].MinValue = 0;
-	Parameters[DELAY_FEEDBACK].MaxValue = 1;
-	Parameters[DELAY_FEEDBACK].SourceVariable = &feedback;
-	Parameters[DELAY_FEEDBACK].DefaultValue = feedback;
-	Parameters[DELAY_FEEDBACK].Description = "Amount of delay decay";
+	auto& warmthParam = AddParameter();
+	warmthParam.Name = "Warm";
+	warmthParam.MinValue = 0;
+	warmthParam.MaxValue = 1;
+	warmthParam.SourceVariable = &warmth;
+	warmthParam.DefaultValue = warmth;
+	warmthParam.IsAdvanced = true;
+	warmthParam.Description = "Amount of frequency filtering in the decay";
 
-	Parameters[DELAY_WARMTH].Name = "Warm";
-	Parameters[DELAY_WARMTH].MinValue = 0;
-	Parameters[DELAY_WARMTH].MaxValue = 1;
-	Parameters[DELAY_WARMTH].SourceVariable = &warmth;
-	Parameters[DELAY_WARMTH].DefaultValue = warmth;
-	Parameters[DELAY_WARMTH].IsAdvanced = true;
-	Parameters[DELAY_WARMTH].Description = "Amount of frequency filtering in the decay";
-
-	Parameters[DELAY_LOWCUT].Name = "HiLo";
-	Parameters[DELAY_LOWCUT].SourceVariable = &hilo;
-	Parameters[DELAY_LOWCUT].DefaultValue = hilo;
-	Parameters[DELAY_LOWCUT].IsAdvanced = true;
-	Parameters[DELAY_LOWCUT].Description = "Bias of filtering toward low/high frequencies";
+	auto& hiLowParam = AddParameter();
+	hiLowParam.Name = "HiLo";
+	hiLowParam.SourceVariable = &hilo;
+	hiLowParam.DefaultValue = hilo;
+	hiLowParam.IsAdvanced = true;
+	hiLowParam.Description = "Bias of filtering toward low/high frequencies";
 }
 
 void Delay::init(int samplingFreq)

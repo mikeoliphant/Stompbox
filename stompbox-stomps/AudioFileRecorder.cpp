@@ -6,13 +6,12 @@ AudioFileRecorder::AudioFileRecorder(std::filesystem::path savePath)
 
 	Name = "AudioFileRecorder";
 
-	NumParameters = AUDIOFILERECORDER_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& secondsParam = AddParameter();
 
-	Parameters[AUDIOFILERECORDER_SECONDSRECORDED].Name = "SecsRecorded";
-	Parameters[AUDIOFILERECORDER_SECONDSRECORDED].SourceVariable = &recordSeconds;
-	Parameters[AUDIOFILERECORDER_SECONDSRECORDED].DefaultValue = 0;
-	Parameters[AUDIOFILERECORDER_SECONDSRECORDED].SuppressSave = true;
+	secondsParam.Name = "SecsRecorded";
+	secondsParam.SourceVariable = &recordSeconds;
+	secondsParam.DefaultValue = 0;
+	secondsParam.SuppressSave = true;
 }
 
 AudioFileRecorder::~AudioFileRecorder()

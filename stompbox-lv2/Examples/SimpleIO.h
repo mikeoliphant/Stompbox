@@ -17,7 +17,7 @@ StompBox* CreateMasterVolumePlugin(PluginFactory& factory)
 {
 	Gain* master = new Gain(0, -40, 40);
 
-	master->Parameters[GAIN_GAIN].Name = "Volume";
+	master->GetParameter("Gain")->Name = "Volume";
 
 	master->IsUserSelectable = false;
 

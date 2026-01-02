@@ -2,13 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	GAIN_GAIN,
-	GAIN_LEVEL,
-	GAIN_NUMPARAMETERS
-};
-
 class Gain : public StompBox
 {
 private:

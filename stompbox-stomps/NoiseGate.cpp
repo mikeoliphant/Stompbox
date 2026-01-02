@@ -13,44 +13,45 @@ NoiseGate::NoiseGate()
 	holdMS = 10;
 	releaseMS = 50;
 
-	NumParameters = NOISEGATE_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& threshParam = AddParameter();
+	threshParam.Name = "Thresh";
+	threshParam.MinValue = -100;
+	threshParam.MaxValue = 0;
+	threshParam.SourceVariable = &threshold;
+	threshParam.DefaultValue = threshold;
+	threshParam.CanSyncToHostBPM = true;
+	threshParam.DisplayFormat = "{0:0}db";
+	threshParam.Description = "Signal level that gate closes below";
 
-	Parameters[NOISEGATE_THRESHOLD].Name = "Thresh";
-	Parameters[NOISEGATE_THRESHOLD].MinValue = -100;
-	Parameters[NOISEGATE_THRESHOLD].MaxValue = 0;
-	Parameters[NOISEGATE_THRESHOLD].SourceVariable = &threshold;
-	Parameters[NOISEGATE_THRESHOLD].DefaultValue = threshold;
-	Parameters[NOISEGATE_THRESHOLD].CanSyncToHostBPM = true;
-	Parameters[NOISEGATE_THRESHOLD].DisplayFormat = "{0:0}db";
-	Parameters[NOISEGATE_THRESHOLD].Description = "Signal level that gate closes below";
+	auto& attackParam = AddParameter();
+	attackParam.Name = "Attack";
+	attackParam.MinValue = 1;
+	attackParam.MaxValue = 100;
+	attackParam.SourceVariable = &attackMS;
+	attackParam.DefaultValue = attackMS;
+	attackParam.DisplayFormat = "{0:0}ms";
+	attackParam.IsAdvanced = true;
+	attackParam.Description = "Time (ms) for gate to fully open";
 
-	Parameters[NOISEGATE_ATTACK].Name = "Attack";
-	Parameters[NOISEGATE_ATTACK].MinValue = 1;
-	Parameters[NOISEGATE_ATTACK].MaxValue = 100;
-	Parameters[NOISEGATE_ATTACK].SourceVariable = &attackMS;
-	Parameters[NOISEGATE_ATTACK].DefaultValue = attackMS;
-	Parameters[NOISEGATE_ATTACK].DisplayFormat = "{0:0}ms";
-	Parameters[NOISEGATE_ATTACK].IsAdvanced = true;
-	Parameters[NOISEGATE_ATTACK].Description = "Time (ms) for gate to fully open";
+	auto& holdParam = AddParameter();
+	holdParam.Name = "Hold";
+	holdParam.MinValue = 1;
+	holdParam.MaxValue = 100;
+	holdParam.SourceVariable = &holdMS;
+	holdParam.DefaultValue = holdMS;
+	holdParam.DisplayFormat = "{0:0}ms";
+	holdParam.IsAdvanced = true;
+	holdParam.Description = "Minimum time (ms) gate stays open";
 
-	Parameters[NOISEGATE_HOLD].Name = "Hold";
-	Parameters[NOISEGATE_HOLD].MinValue = 1;
-	Parameters[NOISEGATE_HOLD].MaxValue = 100;
-	Parameters[NOISEGATE_HOLD].SourceVariable = &holdMS;
-	Parameters[NOISEGATE_HOLD].DefaultValue = holdMS;
-	Parameters[NOISEGATE_HOLD].DisplayFormat = "{0:0}ms";
-	Parameters[NOISEGATE_HOLD].IsAdvanced = true;
-	Parameters[NOISEGATE_HOLD].Description = "Minimum time (ms) gate stays open";
-
-	Parameters[NOISEGATE_RELEASE].Name = "Release";
-	Parameters[NOISEGATE_RELEASE].MinValue = 1;
-	Parameters[NOISEGATE_RELEASE].MaxValue = 100;
-	Parameters[NOISEGATE_RELEASE].SourceVariable = &releaseMS;
-	Parameters[NOISEGATE_RELEASE].DefaultValue = releaseMS;
-	Parameters[NOISEGATE_RELEASE].DisplayFormat = "{0:0}ms";
-	Parameters[NOISEGATE_RELEASE].IsAdvanced = true;
-	Parameters[NOISEGATE_RELEASE].Description = "Time (ms) for gate to fully close";
+	auto& releaseParam = AddParameter();
+	releaseParam.Name = "Release";
+	releaseParam.MinValue = 1;
+	releaseParam.MaxValue = 100;
+	releaseParam.SourceVariable = &releaseMS;
+	releaseParam.DefaultValue = releaseMS;
+	releaseParam.DisplayFormat = "{0:0}ms";
+	releaseParam.IsAdvanced = true;
+	releaseParam.Description = "Time (ms) for gate to fully close";
 }
 
 void NoiseGate::init(int samplingFreq)

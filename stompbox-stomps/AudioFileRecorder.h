@@ -10,12 +10,6 @@
 #include "StompBox.h"
 #include "AudioFile.h"
 
-enum
-{
-	AUDIOFILERECORDER_SECONDSRECORDED,
-	AUDIOFILERECORDER_NUMPARAMETERS
-};
-
 class AudioFileRecorder : public StompBox
 {
 private:

@@ -11,9 +11,6 @@ GraphicEqualizer::GraphicEqualizer(int numBands, float* frequencies, float q)
 
 	volume = 0;
 
-	NumParameters = numBands + 1;
-	CreateParameters(NumParameters);
-
 	peakingFilters = new PeakingFilter*[numBands];
 
 	for (int band = 0; band < numBands; band++)
@@ -33,22 +30,24 @@ GraphicEqualizer::GraphicEqualizer(int numBands, float* frequencies, float q)
 			snprintf(name, 80, "%.1fk", freq / 1000);
 		}
 
-		Parameters[band].Name = name;
+		auto& bandParam = AddParameter();
 
-		Parameters[band].MinValue = -15;
-		Parameters[band].MaxValue = 15;
-		Parameters[band].SourceVariable = peakingFilters[band]->GetParameter(PEAKINGFILTER_LEVEL)->SourceVariable;
-		Parameters[band].DefaultValue = 0;
-		Parameters[band].DisplayFormat = "{0:0.0}dB";
-		Parameters[band].ParameterType = PARAMETER_TYPE_VSLIDER;
+		bandParam.Name = name;
+		bandParam.MinValue = -15;
+		bandParam.MaxValue = 15;
+		bandParam.SourceVariable = peakingFilters[band]->GetParameter("Level")->SourceVariable;
+		bandParam.DefaultValue = 0;
+		bandParam.DisplayFormat = "{0:0.0}dB";
+		bandParam.ParameterType = PARAMETER_TYPE_VSLIDER;
 	}
 
-	Parameters[numBands].Name = "Vol";
-	Parameters[numBands].MinValue = -15;
-	Parameters[numBands].MaxValue = 15;
-	Parameters[numBands].SourceVariable = &volume;
-	Parameters[numBands].DefaultValue = volume;
-	Parameters[numBands].ParameterType = PARAMETER_TYPE_VSLIDER;
+	auto& volumeParam = AddParameter();
+	volumeParam.Name = "Vol";
+	volumeParam.MinValue = -15;
+	volumeParam.MaxValue = 15;
+	volumeParam.SourceVariable = &volume;
+	volumeParam.DefaultValue = volume;
+	volumeParam.ParameterType = PARAMETER_TYPE_VSLIDER;
 }
 
 GraphicEqualizer::~GraphicEqualizer()
@@ -57,8 +56,7 @@ GraphicEqualizer::~GraphicEqualizer()
 	{
 		for (int band = 0; band < numBands; band++)
 		{
-			//delete Parameters[band].Name;
-			delete[] peakingFilters[band];
+			delete peakingFilters[band];
 		}
 
 		delete[] peakingFilters;
