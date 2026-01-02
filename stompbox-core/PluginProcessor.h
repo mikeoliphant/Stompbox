@@ -42,10 +42,10 @@ class PluginProcessor
 protected:
 	void UpdateClient();
 	void SendClientMessage(const std::string message);
-	void AppendParamDefs(std::string& dump, StompBox* plugin);
-	void AppendParamDef(std::string& dump, StompBoxParameter* param);
-	void AppendPluginParams(std::string& dump, StompBox* plugin, bool dirtyOnly);
-	void AppendParams(std::string& dump, StompBox* plugin, bool dirtyOnly);
+	void AppendParamDefs(std::string& dump, const StompBox& plugin);
+	void AppendParamDef(std::string& dump, const StompBoxParameter& param);
+	void AppendPluginParams(std::string& dump, const StompBox& plugin, bool dirtyOnly);
+	void AppendParams(std::string& dump, const StompBox& plugin, bool dirtyOnly);
 	void ThreadLoadPreset();
 
 	float sampleRate;

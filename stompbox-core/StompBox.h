@@ -24,60 +24,7 @@ enum
 	PARAMETER_TYPE_POWER
 };
 
-struct StompBoxParameter;
-
-class StompBox
-{
-protected:
-	float samplingFreq = 0;
-	float bpm;
-	int bufferSize;
-
-public:
-	bool Enabled = true;
-	StompBoxParameter* Parameters = nullptr;
-	StompBox* InputGain = nullptr;
-	StompBox* OutputVolume = nullptr;
-	size_t NumParameters;
-	std::string Name;
-	std::string ID;
-	std::string Description;
-	std::string BackgroundColor = "#eeeeee";
-	std::string ForegroundColor = "#000000";
-	bool IsUserSelectable = true;
-	bool NeedsInit = true;
-	bool EnabledIsDirty = false;
-	bool ParamIsDirty = false;
-	std::function<void(int, int, int)> MidiCallback = nullptr;
-
-	StompBox();
-	virtual ~StompBox();
-	virtual void CreateParameters(size_t numParameters);
-	virtual StompBoxParameter* GetParameter(size_t id);
-	virtual StompBoxParameter* GetParameter(const std::string& name);
-	virtual void SetParameterValue(size_t id, float value) final;
-	virtual void SetParameterValue(StompBoxParameter *param, float value);
-	virtual float GetParameterValue(size_t id);
-	virtual float GetParameterValue(StompBoxParameter* param);
-	virtual void HandleCommand(const std::vector<std::string>& commandWords)
-	{
-		(void)commandWords;
-	}
-	virtual void SetBPM(float bpm);
-	virtual void UpdateBPM();
-	virtual void init(int samplingFreq);
-	virtual void instanceConstants(int newSamplingFreq)
-	{
-		(void)newSamplingFreq;
-	}
-	virtual void instanceClear() {};
-	virtual void compute(int count, float* input, float* output)
-	{
-		(void)count;
-		(void)input;
-		(void)output;
-	}
-};
+class StompBox;
 
 struct StompBoxParameter
 {
@@ -101,12 +48,63 @@ struct StompBoxParameter
 	const std::vector<std::string>* EnumValues = nullptr;
 	bool IsDirty = false;
 	bool SuppressSave = false;
-	float GetValue()
+	float GetValue() const;
+	void SetValue(float value);
+};
+
+
+class StompBox
+{
+protected:
+	float samplingFreq = 0;
+	float bpm;
+	int bufferSize;
+
+public:
+	bool Enabled = true;
+	std::vector<StompBoxParameter> Parameters;
+	StompBox* InputGain = nullptr;
+	StompBox* OutputVolume = nullptr;
+	std::string Name;
+	std::string ID;
+	std::string Description;
+	std::string BackgroundColor = "#eeeeee";
+	std::string ForegroundColor = "#000000";
+	bool IsUserSelectable = true;
+	bool NeedsInit = true;
+	bool EnabledIsDirty = false;
+	bool ParamIsDirty = false;
+	std::function<void(int, int, int)> MidiCallback = nullptr;
+
+	StompBox();
+	virtual ~StompBox();
+	virtual StompBoxParameter& AddParameter()
 	{
-		return Stomp->GetParameterValue(this);
+		return Parameters.emplace_back();
 	}
-	void SetValue(float value)
+	virtual StompBoxParameter& AddParameter(const StompBoxParameter toCopy)
 	{
-		return Stomp->SetParameterValue(this, value);
+		return Parameters.emplace_back(toCopy);
+	}
+	virtual StompBoxParameter* GetParameter(const std::string& name);
+	virtual void SetParameterValue(StompBoxParameter &param, float value);
+	virtual float GetParameterValue(const StompBoxParameter& param);
+	virtual void HandleCommand(const std::vector<std::string>& commandWords)
+	{
+		(void)commandWords;
+	}
+	virtual void SetBPM(float bpm);
+	virtual void UpdateBPM();
+	virtual void init(int samplingFreq);
+	virtual void instanceConstants(int newSamplingFreq)
+	{
+		(void)newSamplingFreq;
+	}
+	virtual void instanceClear() {};
+	virtual void compute(int count, float* input, float* output)
+	{
+		(void)count;
+		(void)input;
+		(void)output;
 	}
 };

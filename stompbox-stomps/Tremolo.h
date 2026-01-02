@@ -2,14 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	TREMOLO_SPEED,
-	TREMOLO_DEPTH,
-	TREMOLO_SHAPE,
-	TREMOLO_NUMPARAMETERS
-};
-
 class Tremolo : public StompBox
 {
 private:

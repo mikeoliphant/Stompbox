@@ -2,12 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	PEAKINGFILTER_LEVEL,
-	PEAKINGFILTER_NUMPARAMETERS
-};
-
 class PeakingFilter : public StompBox
 {
 private:

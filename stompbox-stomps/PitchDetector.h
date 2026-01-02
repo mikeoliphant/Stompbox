@@ -3,13 +3,6 @@
 #include "StompBox.h"
 #include "PitchMPM.h"
 
-enum
-{
-	PITCHDETECTOR_MUTE,
-	PITCHDETECTOR_PITCH,
-	PITCHDETECTOR_NUMPARAMETERS
-};
-
 class PitchDetector : public StompBox
 {
 private:

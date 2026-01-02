@@ -14,53 +14,55 @@ MultiGate::MultiGate()
 	softness = 12;
 	strength = 24;
 
-	NumParameters = MULTIGATE_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& threshParam = AddParameter();
+	threshParam.Name = "Thresh";
+	threshParam.MinValue = -120;
+	threshParam.MaxValue = 0;
+	threshParam.SourceVariable = &threshold;
+	threshParam.DefaultValue = threshold;
+	threshParam.RangePower = 2;
+	threshParam.DisplayFormat = "{0:0}db";
+	threshParam.Description = "Gate threshold";
 
-	Parameters[MULTIGATE_THRESHOLD].Name = "Thresh";
-	Parameters[MULTIGATE_THRESHOLD].MinValue = -120;
-	Parameters[MULTIGATE_THRESHOLD].MaxValue = 0;
-	Parameters[MULTIGATE_THRESHOLD].SourceVariable = &threshold;
-	Parameters[MULTIGATE_THRESHOLD].DefaultValue = threshold;
-	Parameters[MULTIGATE_THRESHOLD].RangePower = 2;
-	Parameters[MULTIGATE_THRESHOLD].DisplayFormat = "{0:0}db";
-	Parameters[MULTIGATE_THRESHOLD].Description = "Gate threshold";
+	auto& strengthParam = AddParameter();
+	strengthParam.Name = "Strength";
+	strengthParam.MinValue = 1;
+	strengthParam.MaxValue = 96;
+	strengthParam.SourceVariable = &strength;
+	strengthParam.DefaultValue = strength;
+	strengthParam.DisplayFormat = "{0:0}dB";
+	strengthParam.Description = "Amount of gate attenuation";
+	strengthParam.IsAdvanced = false;
 
-	Parameters[MULTIGATE_STRENGTH].Name = "Strength";
-	Parameters[MULTIGATE_STRENGTH].MinValue = 1;
-	Parameters[MULTIGATE_STRENGTH].MaxValue = 96;
-	Parameters[MULTIGATE_STRENGTH].SourceVariable = &strength;
-	Parameters[MULTIGATE_STRENGTH].DefaultValue = strength;
-	Parameters[MULTIGATE_STRENGTH].DisplayFormat = "{0:0}dB";
-	Parameters[MULTIGATE_STRENGTH].Description = "Amount of gate attenuation";
-	Parameters[MULTIGATE_STRENGTH].IsAdvanced = false;
+	auto& attackParam = AddParameter();
+	attackParam.Name = "Attack";
+	attackParam.MinValue = 1;
+	attackParam.MaxValue = 50;
+	attackParam.SourceVariable = &attackMS;
+	attackParam.DefaultValue = attackMS;
+	attackParam.DisplayFormat = "{0:0}ms";
+	attackParam.Description = "Reaction time for gate opening";
+	attackParam.IsAdvanced = true;
 
-	Parameters[MULTIGATE_ATTACK].Name = "Attack";
-	Parameters[MULTIGATE_ATTACK].MinValue = 1;
-	Parameters[MULTIGATE_ATTACK].MaxValue = 50;
-	Parameters[MULTIGATE_ATTACK].SourceVariable = &attackMS;
-	Parameters[MULTIGATE_ATTACK].DefaultValue = attackMS;
-	Parameters[MULTIGATE_ATTACK].DisplayFormat = "{0:0}ms";
-	Parameters[MULTIGATE_ATTACK].Description = "Reaction time for gate opening";
-	Parameters[MULTIGATE_ATTACK].IsAdvanced = true;
+	auto& releaseParam = AddParameter();
+	releaseParam.Name = "Release";
+	releaseParam.MinValue = 1;
+	releaseParam.MaxValue = 50;
+	releaseParam.SourceVariable = &releaseMS;
+	releaseParam.DefaultValue = releaseMS;
+	releaseParam.DisplayFormat = "{0:0}ms";
+	releaseParam.Description = "Reaction time for gate closing";
+	releaseParam.IsAdvanced = true;
 
-	Parameters[MULTIGATE_RELEASE].Name = "Release";
-	Parameters[MULTIGATE_RELEASE].MinValue = 1;
-	Parameters[MULTIGATE_RELEASE].MaxValue = 50;
-	Parameters[MULTIGATE_RELEASE].SourceVariable = &releaseMS;
-	Parameters[MULTIGATE_RELEASE].DefaultValue = releaseMS;
-	Parameters[MULTIGATE_RELEASE].DisplayFormat = "{0:0}ms";
-	Parameters[MULTIGATE_RELEASE].Description = "Reaction time for gate closing";
-	Parameters[MULTIGATE_RELEASE].IsAdvanced = true;
-
-	Parameters[MULTIGATE_SOFTNESS].Name = "Soft";
-	Parameters[MULTIGATE_SOFTNESS].MinValue = 1;
-	Parameters[MULTIGATE_SOFTNESS].MaxValue = 18;
-	Parameters[MULTIGATE_SOFTNESS].SourceVariable = &softness;
-	Parameters[MULTIGATE_SOFTNESS].DefaultValue = softness;
-	Parameters[MULTIGATE_SOFTNESS].DisplayFormat = "{0:0}dB";
-	Parameters[MULTIGATE_SOFTNESS].Description = "dB range above threshold for smooth open/close";
-	Parameters[MULTIGATE_SOFTNESS].IsAdvanced = true;
+	auto& softParam = AddParameter();
+	softParam.Name = "Soft";
+	softParam.MinValue = 1;
+	softParam.MaxValue = 18;
+	softParam.SourceVariable = &softness;
+	softParam.DefaultValue = softness;
+	softParam.DisplayFormat = "{0:0}dB";
+	softParam.Description = "dB range above threshold for smooth open/close";
+	softParam.IsAdvanced = true;
 }
 
 void MultiGate::init(int samplingFreq)

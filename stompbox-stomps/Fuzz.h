@@ -2,15 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	FUZZ_FUZZ,
-	FUZZ_OCTAVE,
-	FUZZ_LEVEL,
-	FUZZ_ASYMMETRY,
-	FUZZ_NUMPARAMETERS
-};
-
 class Fuzz : public StompBox
 {
 private:

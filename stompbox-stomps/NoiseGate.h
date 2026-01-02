@@ -2,15 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	NOISEGATE_THRESHOLD,
-	NOISEGATE_ATTACK,
-	NOISEGATE_HOLD,
-	NOISEGATE_RELEASE,
-	NOISEGATE_NUMPARAMETERS
-};
-
 class NoiseGate : public StompBox
 {
 private:

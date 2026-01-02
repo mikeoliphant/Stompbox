@@ -7,18 +7,16 @@ NAM::NAM(const std::string folderName, const std::vector<std::string> fileExtens
     Name = "NAM";
     Description = "Neural Amp Modeler capture playback";
 
-    NumParameters = NAM_NUMPARAMETERS;
-    CreateParameters(NumParameters);
-
-    Parameters[NAM_MODEL].Name = "Model";
-    Parameters[NAM_MODEL].SourceVariable = &modelIndex;
-    Parameters[NAM_MODEL].ParameterType = PARAMETER_TYPE_FILE;
-    Parameters[NAM_MODEL].FilePath = "NAM";
-    Parameters[NAM_MODEL].EnumValues = &fileType.GetFileNames();
-    Parameters[NAM_MODEL].DefaultValue = -1;
-    Parameters[NAM_MODEL].Description = "Selected NAM model";
-    Parameters[NAM_MODEL].MinValue = -1;
-    Parameters[NAM_MODEL].MaxValue = (float)(fileType.GetFileNames().size()) - 1;
+    auto& modelParam = AddParameter();
+    modelParam.Name = "Model";
+    modelParam.SourceVariable = &modelIndex;
+    modelParam.ParameterType = PARAMETER_TYPE_FILE;
+    modelParam.FilePath = "NAM";
+    modelParam.EnumValues = &fileType.GetFileNames();
+    modelParam.DefaultValue = -1;
+    modelParam.Description = "Selected NAM model";
+    modelParam.MinValue = -1;
+    modelParam.MaxValue = (float)(fileType.GetFileNames().size()) - 1;
 }
 
 void NAM::init(int samplingFreq)
@@ -26,11 +24,11 @@ void NAM::init(int samplingFreq)
     StompBox::init(samplingFreq);
 }
 
-void NAM::SetParameterValue(StompBoxParameter* parameter, float value)
+void NAM::SetParameterValue(StompBoxParameter& parameter, float value)
 {
     StompBox::SetParameterValue(parameter, value);
 
-    if (parameter == &Parameters[NAM_MODEL])
+    if (parameter.Name == "Model")
     {
         namLoader.LoadIndex((int)modelIndex);
     }

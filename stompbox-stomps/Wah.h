@@ -2,12 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	WAH_LEVEL,
-	WAH_NUMPARAMETERS
-};
-
 class Wah : public StompBox
 {
 private:

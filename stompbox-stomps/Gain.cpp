@@ -11,24 +11,23 @@ Gain::Gain(float initialGain, float minGain, float maxGain)
 	this->minGain = minGain;
 	this->maxGain = maxGain;
 
-	NumParameters = GAIN_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& gainParam = AddParameter();
+	gainParam.Name = "Gain";
+	gainParam.SourceVariable = &gain;
+	gainParam.MinValue = minGain;
+	gainParam.MaxValue = maxGain;
+	gainParam.DefaultValue = initialGain;
+	gainParam.DisplayFormat = "{0:0.0}dB";
+	gainParam.Description = "Gain strength in dB";
 
-	Parameters[GAIN_GAIN].Name = "Gain";
-	Parameters[GAIN_GAIN].SourceVariable = &gain;
-	Parameters[GAIN_GAIN].MinValue = minGain;
-	Parameters[GAIN_GAIN].MaxValue = maxGain;
-	Parameters[GAIN_GAIN].DefaultValue = initialGain;
-	Parameters[GAIN_GAIN].DisplayFormat = "{0:0.0}dB";
-	Parameters[GAIN_GAIN].Description = "Gain strength in dB";
-
-	Parameters[GAIN_LEVEL].Name = "Level";
-	Parameters[GAIN_LEVEL].SourceVariable = &currentLevel;
-	Parameters[GAIN_LEVEL].IsOutput = true;
-	Parameters[GAIN_LEVEL].MinValue = 0;
-	Parameters[GAIN_LEVEL].MaxValue = 1;
-	Parameters[GAIN_LEVEL].DefaultValue = currentLevel;
-	Parameters[GAIN_LEVEL].Description = "Current Level";
+	auto& levelParam = AddParameter();
+	levelParam.Name = "Level";
+	levelParam.SourceVariable = &currentLevel;
+	levelParam.IsOutput = true;
+	levelParam.MinValue = 0;
+	levelParam.MaxValue = 1;
+	levelParam.DefaultValue = currentLevel;
+	levelParam.Description = "Current Level";
 }
 
 double Gain::GetLevel()

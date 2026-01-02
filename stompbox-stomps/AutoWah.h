@@ -2,12 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	AUTOWAH_LEVEL,
-	AUTOWAH_NUMPARAMETERS
-};
-
 class AutoWah : public StompBox
 {
 private:

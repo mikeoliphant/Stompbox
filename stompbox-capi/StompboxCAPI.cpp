@@ -228,7 +228,7 @@ size_t GetPluginNumParameters(void* plugin)
         numParams++;
     }
 
-    numParams += stomp->NumParameters;
+    numParams += stomp->Parameters.size();
 
     if (stomp->OutputVolume != nullptr)
     {
@@ -250,10 +250,10 @@ void* GetPluginParameter(void* plugin, size_t index)
         index--;
     }
 
-    if (index < stomp->NumParameters)
+    if (index < stomp->Parameters.size())
         return (void*)(&stomp->Parameters[index]);
 
-    index -= stomp->NumParameters;
+    index -= stomp->Parameters.size();
 
     if (index > 0)
         return nullptr;

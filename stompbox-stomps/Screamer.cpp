@@ -80,28 +80,28 @@ TS9::TS9()
 	fVslider1 = FAUSTFLOAT(1000.0);
 	fVslider2 = FAUSTFLOAT(0.5);
 
-	NumParameters = SCREAMER_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& driveParam = AddParameter();
+	driveParam.Name = "Drive";
+	driveParam.SourceVariable = &fVslider2;
+	driveParam.DefaultValue = fVslider2;
+	driveParam.Description = "Drive/strength";
 
-	Parameters[SCREAMER_DRIVE].Name = "Drive";
-	Parameters[SCREAMER_DRIVE].SourceVariable = &fVslider2;
-	Parameters[SCREAMER_DRIVE].DefaultValue = fVslider2;
-	Parameters[SCREAMER_DRIVE].Description = "Drive/strength";
+	auto& toneParam = AddParameter();
+	toneParam.Name = "Tone";
+	toneParam.MinValue = 100.0;
+	toneParam.MaxValue = 1000.0;
+	toneParam.SourceVariable = &fVslider1;
+	toneParam.DefaultValue = fVslider1;
+	toneParam.DisplayFormat = "{0:0}hz";
+	toneParam.Description = "Amount of high frequency roll-off";
 
-	Parameters[SCREAMER_TONE].Name = "Tone";
-	Parameters[SCREAMER_TONE].MinValue = 100.0;
-	Parameters[SCREAMER_TONE].MaxValue = 1000.0;
-	Parameters[SCREAMER_TONE].SourceVariable = &fVslider1;
-	Parameters[SCREAMER_TONE].DefaultValue = fVslider1;
-	Parameters[SCREAMER_TONE].DisplayFormat = "{0:0}hz";
-	Parameters[SCREAMER_TONE].Description = "Amount of high frequency roll-off";
-
-	Parameters[SCREAMER_LEVEL].Name = "Level";
-	Parameters[SCREAMER_LEVEL].MinValue = -20.0;
-	Parameters[SCREAMER_LEVEL].MaxValue = 20.0;
-	Parameters[SCREAMER_LEVEL].SourceVariable = &fVslider0;
-	Parameters[SCREAMER_LEVEL].DefaultValue = fVslider0;
-	Parameters[SCREAMER_LEVEL].Description = "Output volume level";
+	auto& levelParam = AddParameter();
+	levelParam.Name = "Level";
+	levelParam.MinValue = -20.0;
+	levelParam.MaxValue = 20.0;
+	levelParam.SourceVariable = &fVslider0;
+	levelParam.DefaultValue = fVslider0;
+	levelParam.Description = "Output volume level";
 }
 
 void TS9::init(int samplingFreq)

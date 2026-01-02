@@ -2,16 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	DELAY_DELAY,
-	DELAY_LEVEL,
-	DELAY_FEEDBACK,
-	DELAY_WARMTH,
-	DELAY_LOWCUT,
-	DELAY_NUMPARAMETERS
-};
-
 class Delay : public StompBox
 {
 private:
