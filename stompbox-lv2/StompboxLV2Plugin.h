@@ -98,7 +98,7 @@ public:
 		controlAtomPort(),
 		inputAudioPort(),
 		outputAudioPort(),
-		processor("./", false)
+		processor("./")
 	{
 		//AddPort(controlAtomPort);
 		AddPort(inputAudioPort);

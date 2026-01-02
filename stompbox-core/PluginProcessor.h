@@ -50,9 +50,6 @@ protected:
 
 	float sampleRate;
 	float bpm = 120;
-	int tmpBufSize = 64;
-	float* tmpBuf1 = nullptr;
-	float* tmpBuf2 = nullptr;
 	bool initialized = false;
 	PluginFactory pluginFactory;
 	StompboxServer stompboxServer;
@@ -92,7 +89,7 @@ protected:
 	std::vector<float> splitBuffer;
 
 public:
-	PluginProcessor(std::filesystem::path dataPath, bool dawMode);
+	PluginProcessor(std::filesystem::path dataPath);
 	~PluginProcessor();
 	static std::string GetVersion();
 	void ScanPresets();

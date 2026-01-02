@@ -53,7 +53,7 @@ std::string PluginProcessor::GetVersion()
     return "stompbox v0.1.15 - Copyright 2023-2025 Mike Oliphant";
 }
 
-PluginProcessor::PluginProcessor(std::filesystem::path dataPath, bool dawMode)
+PluginProcessor::PluginProcessor(std::filesystem::path dataPath)
 {
     this->dataPath.assign(dataPath);
 
@@ -66,14 +66,6 @@ PluginProcessor::PluginProcessor(std::filesystem::path dataPath, bool dawMode)
     ScanPresets();
 
     pluginFactory.SetDataPath(dataPath);
-
-    tmpBuf1 = new float[tmpBufSize];
-    tmpBuf2 = new float[tmpBufSize];
-
-    for (int i = 0; i < tmpBufSize; i++)
-    {
-        tmpBuf1[i] = 0;
-    }
 
     for (int i = 0; i < 16; i++)
     {
@@ -94,12 +86,6 @@ PluginProcessor::PluginProcessor(std::filesystem::path dataPath, bool dawMode)
 
 PluginProcessor::~PluginProcessor()
 {
-    if (tmpBuf1 != nullptr)
-    {
-        delete[] tmpBuf1;
-        delete[] tmpBuf2;
-    }
-
     if (serialDisplayInterface.IsConnected())
         serialDisplayInterface.Close();
 }

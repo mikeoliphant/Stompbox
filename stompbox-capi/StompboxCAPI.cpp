@@ -20,9 +20,9 @@ const char* GetStringVectorValue(void* strVec, size_t index)
 
 // Processor methods
 
-void* CreateProcessor(const wchar_t* dataPath, bool dawMode)
+void* CreateProcessor(const wchar_t* dataPath)
 {
-    PluginProcessor* processor = new PluginProcessor(dataPath, dawMode);
+    PluginProcessor* processor = new PluginProcessor(dataPath);
 
     AddDefaultPlugins(processor->GetPluginFactory());
 

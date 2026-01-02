@@ -261,7 +261,7 @@ int main(int argc, char* argv[])
     midi_input_port = jack_port_register(client, "midi_in", JACK_DEFAULT_MIDI_TYPE, JackPortIsInput, 0);
     //midi_output_port = jack_port_register(client, "midi_out", JACK_DEFAULT_MIDI_TYPE, JackPortIsOutput, 0);
 
-    guitarProcessor = new PluginProcessor(std::filesystem::current_path(), false);
+    guitarProcessor = new PluginProcessor(std::filesystem::current_path());
 
     AddDefaultPlugins(guitarProcessor->GetPluginFactory());
 

@@ -19,7 +19,7 @@ STOMPBOX_EXTERN size_t GetStringVectorSize(void* strVec);
 
 STOMPBOX_EXTERN const char* GetStringVectorValue(void* strVec, size_t index);
 
-STOMPBOX_EXTERN void* CreateProcessor(const wchar_t* dataPath, bool dawMode);
+STOMPBOX_EXTERN void* CreateProcessor(const wchar_t* dataPath);
 
 STOMPBOX_EXTERN void DeleteProcessor(void* processor);
 
