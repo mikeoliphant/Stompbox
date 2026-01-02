@@ -80,7 +80,11 @@ public:
 	virtual ~StompBox();
 	virtual StompBoxParameter& AddParameter()
 	{
-		return Parameters.emplace_back();
+		auto& param = Parameters.emplace_back();
+
+		param.Stomp = this;
+
+		return param;
 	}
 	virtual StompBoxParameter& AddParameter(const StompBoxParameter toCopy)
 	{
