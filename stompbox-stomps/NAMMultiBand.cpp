@@ -8,24 +8,22 @@ NAMMultiBand::NAMMultiBand(const std::string folderName, const std::vector<std::
 
 	nam.InputGain = new Gain(0, -40, 40);
 	nam.OutputVolume = new Gain(0, -40, 40);
-	nam.OutputVolume->Parameters[GAIN_GAIN].Name = "Volume";
+	nam.OutputVolume->GetParameter("Gain")->Name = "Volume";
 
-    NumParameters = NAMMULTIBAND_NUMPARAMETERS;
-    CreateParameters(NumParameters);
+	auto& crossoverParam = AddParameter();
+	crossoverParam.Name = "Freq";
+	crossoverParam.MinValue = 10;
+	crossoverParam.MaxValue = 1000;
+	crossoverParam.SourceVariable = &crossoverFreq;
+	crossoverParam.DefaultValue = crossoverFreq;
+	crossoverParam.RangePower = 3;
+	crossoverParam.DisplayFormat = "{0:0}hz";
 
-	Parameters[NAMMULTIBAND_CROSSOVER_FREQ].Name = "Freq";
-	Parameters[NAMMULTIBAND_CROSSOVER_FREQ].MinValue = 10;
-	Parameters[NAMMULTIBAND_CROSSOVER_FREQ].MaxValue = 1000;
-	Parameters[NAMMULTIBAND_CROSSOVER_FREQ].SourceVariable = &crossoverFreq;
-	Parameters[NAMMULTIBAND_CROSSOVER_FREQ].DefaultValue = crossoverFreq;
-	Parameters[NAMMULTIBAND_CROSSOVER_FREQ].RangePower = 3;
-	Parameters[NAMMULTIBAND_CROSSOVER_FREQ].DisplayFormat = "{0:0}hz";
+	AddParameter(*nam.GetParameter("Gain"));
+	AddParameter(*nam.GetParameter("Volume"));
 
-	memcpy(&Parameters[NAMMULTIBAND_MODEL_GAIN], &nam.InputGain->Parameters[GAIN_GAIN], sizeof(StompBoxParameter));
-	memcpy(&Parameters[NAMMULTIBAND_MODEL_VOLUME], &nam.OutputVolume->Parameters[GAIN_GAIN], sizeof(StompBoxParameter));
-
-	memcpy(&Parameters[NAMMULTIBAND_MODEL], &nam.Parameters[NAM_MODEL], sizeof(StompBoxParameter));
-	Parameters[NAMMULTIBAND_MODEL].Stomp = this;
+	auto& modelParam = AddParameter(*nam.GetParameter("Model"));
+	modelParam.Stomp = this;
 }
 
 void NAMMultiBand::init(int samplingFreq)
@@ -37,24 +35,24 @@ void NAMMultiBand::init(int samplingFreq)
 	crossover.init(samplingFreq);
 }
 
-float NAMMultiBand::GetParameterValue(StompBoxParameter* parameter)
+float NAMMultiBand::GetParameterValue(const StompBoxParameter& parameter)
 {
-	if (parameter == &Parameters[NAMMULTIBAND_MODEL])
+	if (parameter.Name == "Model")
 	{
-		return nam.GetParameter(NAM_MODEL)->GetValue();
+		return nam.GetParameter("Model")->GetValue();
 	}
 
-	return *(parameter->SourceVariable);
+	return *(parameter.SourceVariable);
 }
 
 
-void NAMMultiBand::SetParameterValue(StompBoxParameter *parameter, float value)
+void NAMMultiBand::SetParameterValue(StompBoxParameter &parameter, float value)
 {
 	StompBox::SetParameterValue(parameter, value);
 
-	if (parameter == &Parameters[NAMMULTIBAND_MODEL])
+	if (parameter.Name == "Model")
 	{
-		nam.GetParameter(NAM_MODEL)->SetValue(value);
+		nam.GetParameter("Model")->SetValue(value);
 	}
 }
 

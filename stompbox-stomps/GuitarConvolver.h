@@ -25,14 +25,6 @@
 
 enum
 {
-	CONVOLVER_IMPULSE,
-	CONVOLVER_DRY,
-	CONVOLVER_WET,
-	CONVOLVER_NUMPARAMETERS
-};
-
-enum
-{
 	IMPUlSE_PARAM_SAMPLERATE
 };
 
@@ -159,8 +151,8 @@ private:
 public:
 	GuitarConvolver(const std::string folderName, const std::vector<std::string> fileExtensions, const std::filesystem::path& basePath);
 	virtual ~GuitarConvolver() {}
-	virtual void init(int samplingFreq);
-	void SetParameterValue(StompBoxParameter* parameter, float value);
+	virtual void init(int samplingFreq) override;
+	void SetParameterValue(StompBoxParameter& parameter, float value) override;
 	void SetMaxIRSamples(int numSamples)
 	{
 		irLoader.SetMaxIRSamples(numSamples);
@@ -169,5 +161,5 @@ public:
 	{
 		irLoader.SetEpsilon(epsilon);
 	}
-	virtual void compute(int count, float* input, float* output);
+	virtual void compute(int count, float* input, float* output) override;
 };

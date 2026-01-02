@@ -2,15 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	TONESTACK_BASS,
-	TONESTACK_MIDDLE,
-	TONESTACK_TREBLE,
-	TONESTACK_PRESET,
-	TONESTACK_NUMPARAMETERS
-};
-
 struct TonestackDefinition
 {
 	std::string Name;
@@ -107,11 +98,11 @@ private:
 public:
 	Tonestack();
 	virtual ~Tonestack() {}
-	void SetParameterValue(StompBoxParameter* parameter, float value);
+	void SetParameterValue(StompBoxParameter& parameter, float value) override;
 	virtual void SetPreset(int preset);
 	virtual void SetParameters(double r1, double r2, double r3, double r4, double c1, double c2, double c3);
-	virtual void init(int samplingFreq);
-	virtual void instanceConstants(int samplingFreq);
-	virtual void instanceClear();
-	virtual void compute(int count, FAUSTFLOAT* input, FAUSTFLOAT* output);
+	virtual void init(int samplingFreq) override;
+	virtual void instanceConstants(int samplingFreq) override;
+	virtual void instanceClear() override;
+	virtual void compute(int count, FAUSTFLOAT* input, FAUSTFLOAT* output) override;
 };

@@ -2,16 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	MULTIGATE_THRESHOLD,
-	MULTIGATE_STRENGTH,
-	MULTIGATE_ATTACK,
-	MULTIGATE_RELEASE,
-	MULTIGATE_SOFTNESS,
-	MULTIGATE_NUMPARAMETERS
-};
-
 class MultiGate : public StompBox
 {
 private:

@@ -19,35 +19,37 @@ Vibrato::Vibrato()
 	fb = 0.5;   // feedback
 	fratio = 1.5;
 
-	NumParameters = VIBRATO_NUMPARAMETERS;
-	CreateParameters(NumParameters);
-	Parameters[VIBRATO_SPEED].Name = "Speed";
-	Parameters[VIBRATO_SPEED].MinValue = 0.1f;
-	Parameters[VIBRATO_SPEED].MaxValue = 10;
-	Parameters[VIBRATO_SPEED].SourceVariable = &freq;
-	Parameters[VIBRATO_SPEED].DefaultValue = freq;
-	Parameters[VIBRATO_SPEED].Description = "Rate of the pitch modulation";
+	auto& speedParam = AddParameter();
+	speedParam.Name = "Speed";
+	speedParam.MinValue = 0.1f;
+	speedParam.MaxValue = 10;
+	speedParam.SourceVariable = &freq;
+	speedParam.DefaultValue = freq;
+	speedParam.Description = "Rate of the pitch modulation";
 
-	Parameters[VIBRATO_DEPTH].Name = "Depth";
-	Parameters[VIBRATO_DEPTH].SourceVariable = &depth;
-	Parameters[VIBRATO_DEPTH].DefaultValue = depth;
-	Parameters[VIBRATO_DEPTH].Description = "Strength of the pitch modulation";
+	auto& depthParam = AddParameter();
+	depthParam.Name = "Depth";
+	depthParam.SourceVariable = &depth;
+	depthParam.DefaultValue = depth;
+	depthParam.Description = "Strength of the pitch modulation";
 
-	Parameters[VIBRATO_FEEDBACK].Name = "FBack";
-	Parameters[VIBRATO_FEEDBACK].MinValue = 0;
-	Parameters[VIBRATO_FEEDBACK].MaxValue = 1;
-	Parameters[VIBRATO_FEEDBACK].SourceVariable = &fb;
-	Parameters[VIBRATO_FEEDBACK].DefaultValue = fb;
-	Parameters[VIBRATO_FEEDBACK].IsAdvanced = true;
-	Parameters[VIBRATO_FEEDBACK].Description = "Amount of feedback applied";
+	auto& feedbackParam = AddParameter();
+	feedbackParam.Name = "FBack";
+	feedbackParam.MinValue = 0;
+	feedbackParam.MaxValue = 1;
+	feedbackParam.SourceVariable = &fb;
+	feedbackParam.DefaultValue = fb;
+	feedbackParam.IsAdvanced = true;
+	feedbackParam.Description = "Amount of feedback applied";
 
-	Parameters[VIBRATO_RATIO].Name = "Ratio";
-	Parameters[VIBRATO_RATIO].MinValue = 1.1f;
-	Parameters[VIBRATO_RATIO].MaxValue = 4;
-	Parameters[VIBRATO_RATIO].SourceVariable = &fratio;
-	Parameters[VIBRATO_RATIO].DefaultValue = fratio;
-	Parameters[VIBRATO_RATIO].IsAdvanced = true;
-	Parameters[VIBRATO_RATIO].Description = "Modulation frequency ratio";
+	auto& ratioParam = AddParameter();
+	ratioParam.Name = "Ratio";
+	ratioParam.MinValue = 1.1f;
+	ratioParam.MaxValue = 4;
+	ratioParam.SourceVariable = &fratio;
+	ratioParam.DefaultValue = fratio;
+	ratioParam.IsAdvanced = true;
+	ratioParam.Description = "Modulation frequency ratio";
 }
 
 void Vibrato::init(int samplingFreq)

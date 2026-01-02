@@ -225,20 +225,18 @@ void PluginProcessor::UpdateClient()
                     {
                         if (plugin->Enabled)
                         {
-                            for (size_t i = 0; i < plugin->NumParameters; i++)
+                            for (auto& param : plugin->Parameters)
                             {
-                                StompBoxParameter* param = plugin->GetParameter(i);
-
-                                if (param->IsOutput)
+                                if (param.IsOutput)
                                 {
                                     cmd.clear();
 
                                     cmd.append("SetParam ");
                                     cmd.append(plugin->ID);
                                     cmd.append(" ");
-                                    cmd.append(param->Name);
+                                    cmd.append(param.Name);
                                     cmd.append(" ");
-                                    cmd.append(std::to_string(param->GetValue()));
+                                    cmd.append(std::to_string(param.GetValue()));
                                     cmd.append("\r\n");
 
                                     SendClientMessage(cmd);
@@ -250,7 +248,7 @@ void PluginProcessor::UpdateClient()
                         {
                             cmd.clear();
 
-                            AppendPluginParams(cmd, plugin, true);
+                            AppendPluginParams(cmd, *plugin, true);
 
                             plugin->ParamIsDirty = false;
                             plugin->EnabledIsDirty = false;
@@ -378,12 +376,12 @@ std::string PluginProcessor::DumpConfig()
         dump.append("\r\n");
 
         if (plugin->InputGain != nullptr)
-            AppendParamDef(dump, plugin->InputGain->GetParameter(0));
+            AppendParamDef(dump, *plugin->InputGain->GetParameter(0));
 
-        AppendParamDefs(dump, plugin);
+        AppendParamDefs(dump, *plugin);
 
         if (plugin->OutputVolume != nullptr)
-            AppendParamDef(dump, plugin->OutputVolume->GetParameter(0));
+            AppendParamDef(dump, *plugin->OutputVolume->GetParameter(0));
 
         dump.append("EndConfig\r\n");
     }
@@ -391,24 +389,24 @@ std::string PluginProcessor::DumpConfig()
     return dump;
 }
 
-void PluginProcessor::AppendParamDefs(std::string& dump, StompBox* plugin)
+void PluginProcessor::AppendParamDefs(std::string& dump, const StompBox& plugin)
 {
-    for (size_t i = 0; i < plugin->NumParameters; i++)
+    for (auto& param : plugin.Parameters)
     {
-        AppendParamDef(dump, plugin->GetParameter(i));
+        AppendParamDef(dump, param);
     }
 }
 
-void PluginProcessor::AppendParamDef(std::string& dump, StompBoxParameter* param)
+void PluginProcessor::AppendParamDef(std::string& dump, const StompBoxParameter& param)
 {
     dump.append("ParameterConfig ");
-    dump.append(param->Stomp->ID);
+    dump.append(param.Stomp->ID);
     dump.append(" ");
-    dump.append(param->Name);
+    dump.append(param.Name);
 
     dump.append(" Type ");
 
-    switch (param->ParameterType)
+    switch (param.ParameterType)
     {
     case PARAMETER_TYPE_KNOB:
         dump.append("Knob");
@@ -434,50 +432,50 @@ void PluginProcessor::AppendParamDef(std::string& dump, StompBoxParameter* param
     }
 
     dump.append(" MinValue ");
-    dump.append(std::to_string(param->MinValue));
+    dump.append(std::to_string(param.MinValue));
 
     dump.append(" MaxValue ");
-    dump.append(std::to_string(param->MaxValue));
+    dump.append(std::to_string(param.MaxValue));
 
     dump.append(" DefaultValue ");
-    dump.append(std::to_string(param->DefaultValue));
+    dump.append(std::to_string(param.DefaultValue));
 
     dump.append(" RangePower ");
-    dump.append(std::to_string(param->RangePower));
+    dump.append(std::to_string(param.RangePower));
 
     dump.append(" ValueFormat ");
-    dump.append(param->DisplayFormat);
+    dump.append(param.DisplayFormat);
 
     dump.append(" CanSyncToHostBPM ");
-    dump.append(param->CanSyncToHostBPM ? "1" : "0");
+    dump.append(param.CanSyncToHostBPM ? "1" : "0");
 
     dump.append(" IsAdvanced ");
-    dump.append(param->IsAdvanced ? "1" : "0");
+    dump.append(param.IsAdvanced ? "1" : "0");
 
     dump.append(" IsOutput ");
-    dump.append(param->IsOutput ? "1" : "0");
+    dump.append(param.IsOutput ? "1" : "0");
 
-    if (!param->Description.empty())
+    if (!param.Description.empty())
     {
         dump.append(" Description ");
 
         dump.append("\"");
-        dump.append(param->Description);
+        dump.append(param.Description);
         dump.append("\"");
     }
 
     dump.append("\r\n");
 
-    if (param->ParameterType == PARAMETER_TYPE_ENUM)
+    if (param.ParameterType == PARAMETER_TYPE_ENUM)
     {
         dump.append("ParameterEnumValues ");
 
-        dump.append(param->Stomp->Name);
+        dump.append(param.Stomp->Name);
         dump.append(" ");
-        dump.append(param->Name);
+        dump.append(param.Name);
 
 
-        for (const auto& enumValue : *(param->EnumValues))
+        for (const auto& enumValue : *(param.EnumValues))
         {
             dump.append(" ");
             dump.append(enumValue);
@@ -485,18 +483,18 @@ void PluginProcessor::AppendParamDef(std::string& dump, StompBoxParameter* param
 
         dump.append("\r\n");
     }
-    else if (param->ParameterType == PARAMETER_TYPE_FILE)
+    else if (param.ParameterType == PARAMETER_TYPE_FILE)
     {
         dump.append("ParameterFileTree ");
 
-        dump.append(param->Stomp->Name);
+        dump.append(param.Stomp->Name);
         dump.append(" ");
-        dump.append(param->Name);
+        dump.append(param.Name);
         dump.append(" ");
-        dump.append(param->FilePath);
+        dump.append(param.FilePath);
         dump.append(" ");
 
-        for (const auto& enumValue : *(param->EnumValues))
+        for (const auto& enumValue : *(param.EnumValues))
         {
             dump.append(" \"");
             dump.append(enumValue);
@@ -507,75 +505,73 @@ void PluginProcessor::AppendParamDef(std::string& dump, StompBoxParameter* param
     }
 }
 
-void PluginProcessor::AppendPluginParams(std::string& dump, StompBox* plugin, bool dirtyOnly)
+void PluginProcessor::AppendPluginParams(std::string& dump, const StompBox& plugin, bool dirtyOnly)
 {
-    if (!dirtyOnly || plugin->EnabledIsDirty)
+    if (!dirtyOnly || plugin.EnabledIsDirty)
     {
         dump.append("SetParam ");
-        dump.append(plugin->ID);
+        dump.append(plugin.ID);
         dump.append(" Enabled ");
-        dump.append(plugin->Enabled ? "1" : "0");
+        dump.append(plugin.Enabled ? "1" : "0");
         dump.append("\r\n");
     }
 
-    if (plugin->InputGain != nullptr)
+    if (plugin.InputGain != nullptr)
     {
-        AppendParams(dump, plugin->InputGain, dirtyOnly);
+        AppendParams(dump, *plugin.InputGain, dirtyOnly);
     }
 
-    if (plugin->OutputVolume != nullptr)
+    if (plugin.OutputVolume != nullptr)
     {
-        AppendParams(dump, plugin->OutputVolume, dirtyOnly);
+        AppendParams(dump, *plugin.OutputVolume, dirtyOnly);
     }
 
     AppendParams(dump, plugin, dirtyOnly);
 }
 
-void PluginProcessor::AppendParams(std::string& dump, StompBox* plugin, bool dirtyOnly)
+void PluginProcessor::AppendParams(std::string& dump, const StompBox& plugin, bool dirtyOnly)
 {
-    for (size_t i = 0; i < plugin->NumParameters; i++)
+    for (auto& param : plugin.Parameters)
     {
-        StompBoxParameter* param = plugin->GetParameter(i);
-
-        if (!param->SuppressSave && (!dirtyOnly || param->IsDirty))
+        if (!param.SuppressSave && (!dirtyOnly || param.IsDirty))
         {
             dump.append("SetParam ");
-            dump.append(plugin->ID);
+            dump.append(plugin.ID);
             dump.append(" ");
-            dump.append(param->Name);
+            dump.append(param.Name);
             dump.append(" ");
 
-            if (param->ParameterType == PARAMETER_TYPE_ENUM)
+            if (param.ParameterType == PARAMETER_TYPE_ENUM)
             {
-                int enumIndex = (int)plugin->GetParameterValue(i);
+                int enumIndex = (int)param.GetValue();
 
-                if ((enumIndex >= 0) && (enumIndex <= param->MaxValue))
-                    dump.append((*param->EnumValues)[enumIndex]);
+                if ((enumIndex >= 0) && (enumIndex <= param.MaxValue))
+                    dump.append((*param.EnumValues)[enumIndex]);
             }
-            else if (param->ParameterType == PARAMETER_TYPE_FILE)
+            else if (param.ParameterType == PARAMETER_TYPE_FILE)
             {
-                int enumIndex = (int)plugin->GetParameterValue(i);
+                int enumIndex = (int)param.GetValue();
 
-                if ((enumIndex >= 0) && (enumIndex <= param->MaxValue))
+                if ((enumIndex >= 0) && (enumIndex <= param.MaxValue))
                 {
                     dump.append("\"");
-                    dump.append((*param->EnumValues)[enumIndex]);
+                    dump.append((*param.EnumValues)[enumIndex]);
                     dump.append("\"");
                 }
             }
-            else if ((param->ParameterType == PARAMETER_TYPE_INT) || (param->ParameterType == PARAMETER_TYPE_BOOL))
+            else if ((param.ParameterType == PARAMETER_TYPE_INT) || (param.ParameterType == PARAMETER_TYPE_BOOL))
             {
-                dump.append(std::to_string((int)plugin->GetParameterValue(i)));
+                dump.append(std::to_string((int)param.GetValue()));
             }
-            else if (param->CanSyncToHostBPM && (param->BPMSyncNumerator != 0) && (param->BPMSyncDenominator != 0))
+            else if (param.CanSyncToHostBPM && (param.BPMSyncNumerator != 0) && (param.BPMSyncDenominator != 0))
             {
-                dump.append(std::to_string(param->BPMSyncNumerator));
+                dump.append(std::to_string(param.BPMSyncNumerator));
                 dump.append("/");
-                dump.append(std::to_string(param->BPMSyncDenominator));
+                dump.append(std::to_string(param.BPMSyncDenominator));
             }
             else
             {
-                dump.append(std::to_string(plugin->GetParameterValue(i)));
+                dump.append(std::to_string(param.GetValue()));
             }
             dump.append("\r\n");
         }
@@ -646,7 +642,7 @@ std::string PluginProcessor::DumpProgram()
 
             for (const auto& plugin : plugins)
             {
-                AppendPluginParams(dump, plugin, false);
+                AppendPluginParams(dump, *plugin, false);
             }
         }
     }

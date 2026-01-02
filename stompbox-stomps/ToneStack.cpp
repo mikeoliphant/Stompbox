@@ -39,33 +39,34 @@ Tonestack::Tonestack()
 	fVslider1 = FAUSTFLOAT(5);
 	fVslider2 = FAUSTFLOAT(5);
 
-	NumParameters = TONESTACK_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& bassParam = AddParameter();
+	bassParam.Name = "Bass";
+	bassParam.SourceVariable = &fVslider1;
+	bassParam.MaxValue = 10;
+	bassParam.DefaultValue = fVslider1;
+	bassParam.DisplayFormat = "{0:0.0}";
 
-	Parameters[TONESTACK_BASS].Name = "Bass";
-	Parameters[TONESTACK_BASS].SourceVariable = &fVslider1;
-	Parameters[TONESTACK_BASS].MaxValue = 10;
-	Parameters[TONESTACK_BASS].DefaultValue = fVslider1;
-	Parameters[TONESTACK_BASS].DisplayFormat = "{0:0.0}";
+	auto& midParam = AddParameter();
+	midParam.Name = "Middle";
+	midParam.SourceVariable = &fVslider0;
+	midParam.MaxValue = 10;
+	midParam.DefaultValue = fVslider0;
+	midParam.DisplayFormat = "{0:0.0}";
 
-	Parameters[TONESTACK_MIDDLE].Name = "Middle";
-	Parameters[TONESTACK_MIDDLE].SourceVariable = &fVslider0;
-	Parameters[TONESTACK_MIDDLE].MaxValue = 10;
-	Parameters[TONESTACK_MIDDLE].DefaultValue = fVslider0;
-	Parameters[TONESTACK_MIDDLE].DisplayFormat = "{0:0.0}";
+	auto& trebleParam = AddParameter();
+	trebleParam.Name = "Treble";
+	trebleParam.SourceVariable = &fVslider2;
+	trebleParam.MaxValue = 10;
+	trebleParam.DefaultValue = fVslider2;
+	trebleParam.DisplayFormat = "{0:0.0}";
 
-	Parameters[TONESTACK_TREBLE].Name = "Treble";
-	Parameters[TONESTACK_TREBLE].SourceVariable = &fVslider2;
-	Parameters[TONESTACK_TREBLE].MaxValue = 10;
-	Parameters[TONESTACK_TREBLE].DefaultValue = fVslider2;
-	Parameters[TONESTACK_TREBLE].DisplayFormat = "{0:0.0}";
-
-	Parameters[TONESTACK_PRESET].Name = "Preset";
-	Parameters[TONESTACK_PRESET].SourceVariable = &preset;
-	Parameters[TONESTACK_PRESET].MaxValue = TONSTACK_NUMPRESETS;
-	Parameters[TONESTACK_PRESET].DefaultValue = 0;
-	Parameters[TONESTACK_PRESET].ParameterType = PARAMETER_TYPE_ENUM;
-	Parameters[TONESTACK_PRESET].EnumValues = &presetValues;
+	auto& presetParam = AddParameter();
+	presetParam.Name = "Preset";
+	presetParam.SourceVariable = &preset;
+	presetParam.MaxValue = TONSTACK_NUMPRESETS;
+	presetParam.DefaultValue = 0;
+	presetParam.ParameterType = PARAMETER_TYPE_ENUM;
+	presetParam.EnumValues = &presetValues;
 
 	for (int i = 0; i < TONSTACK_NUMPRESETS; i++)
 	{
@@ -73,11 +74,11 @@ Tonestack::Tonestack()
 	}
 }
 
-void Tonestack::SetParameterValue(StompBoxParameter *parameter, float value)
+void Tonestack::SetParameterValue(StompBoxParameter& parameter, float value)
 {
 	StompBox::SetParameterValue(parameter, value);
 
-	if (parameter == &Parameters[TONESTACK_PRESET])
+	if (parameter.Name == "Preset")
 	{
 		needUpdate = true;
 	}

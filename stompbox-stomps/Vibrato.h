@@ -2,15 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	VIBRATO_SPEED,
-	VIBRATO_DEPTH,
-	VIBRATO_FEEDBACK,
-	VIBRATO_RATIO,
-	VIBRATO_NUMPARAMETERS
-};
-
 class Vibrato : public StompBox
 {
 private:

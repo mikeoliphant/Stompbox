@@ -15,56 +15,58 @@ Compressor::Compressor()
 	fHslider3 = FAUSTFLOAT(3.0);	// knee
 	fHslider4 = FAUSTFLOAT(2.0);	// ratio
 
-	NumParameters = COMPRESSOR_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& threshParam = AddParameter();
+	threshParam.Name = "Thresh";
+	threshParam.SourceVariable = &fHslider0;
+	threshParam.MinValue = -40;
+	threshParam.MaxValue = 0;
+	threshParam.DefaultValue = fHslider0;
+	threshParam.DisplayFormat = "{0:0.0}dB";
+	threshParam.Description = "Compression threshold in dB";
 
-	Parameters[COMPRESSOR_THRESHOLD].Name = "Thresh";
-	Parameters[COMPRESSOR_THRESHOLD].SourceVariable = &fHslider0;
-	Parameters[COMPRESSOR_THRESHOLD].MinValue = -40;
-	Parameters[COMPRESSOR_THRESHOLD].MaxValue = 0;
-	Parameters[COMPRESSOR_THRESHOLD].DefaultValue = fHslider0;
-	Parameters[COMPRESSOR_THRESHOLD].DisplayFormat = "{0:0.0}dB";
-	Parameters[COMPRESSOR_THRESHOLD].Description = "Compression threshold in dB";
+	auto& ratioParam = AddParameter();
+	ratioParam.Name = "Ratio";
+	ratioParam.SourceVariable = &fHslider4;
+	ratioParam.MinValue = 1;
+	ratioParam.MaxValue = 20;
+	ratioParam.DefaultValue = fHslider4;
+	ratioParam.DisplayFormat = "{0:0.0}";
+	ratioParam.Description = "Compression ratio";
 
-	Parameters[COMPRESSOR_RATIO].Name = "Ratio";
-	Parameters[COMPRESSOR_RATIO].SourceVariable = &fHslider4;
-	Parameters[COMPRESSOR_RATIO].MinValue = 1;
-	Parameters[COMPRESSOR_RATIO].MaxValue = 20;
-	Parameters[COMPRESSOR_RATIO].DefaultValue = fHslider4;
-	Parameters[COMPRESSOR_RATIO].DisplayFormat = "{0:0.0}";
-	Parameters[COMPRESSOR_RATIO].Description = "Compression ratio";
+	auto& attackParam = AddParameter();
+	attackParam.Name = "Attack";
+	attackParam.MinValue = 0.2f;
+	attackParam.MaxValue = 50.0f;
+	attackParam.Step = 0.001f;
+	attackParam.DefaultValue = fHslider2;
+	attackParam.SourceVariable = &fHslider2;
+	attackParam.DisplayFormat = "{0:0.0}ms";
+	attackParam.Description = "Compression attack time (ms)";
 
-	Parameters[COMPRESSOR_ATTACK].Name = "Attack";
-	Parameters[COMPRESSOR_ATTACK].MinValue = 0.2f;
-	Parameters[COMPRESSOR_ATTACK].MaxValue = 50.0f;
-	Parameters[COMPRESSOR_ATTACK].Step = 0.001f;
-	Parameters[COMPRESSOR_ATTACK].DefaultValue = fHslider2;
-	Parameters[COMPRESSOR_ATTACK].SourceVariable = &fHslider2;
-	Parameters[COMPRESSOR_ATTACK].DisplayFormat = "{0:0.0}ms";
-	Parameters[COMPRESSOR_ATTACK].Description = "Compression attack time (ms)";
+	auto& releaseParam = AddParameter();
+	releaseParam.Name = "Release";
+	releaseParam.MinValue = 0;
+	releaseParam.MaxValue = 1000.0f;
+	releaseParam.Step = 0.1f;
+	releaseParam.DefaultValue = fHslider1;
+	releaseParam.SourceVariable = &fHslider1;
+	releaseParam.DisplayFormat = "{0:0.0}ms";
+	releaseParam.Description = "Compression release time (ms)";
 
-	Parameters[COMPRESSOR_RELEASE].Name = "Release";
-	Parameters[COMPRESSOR_RELEASE].MinValue = 0;
-	Parameters[COMPRESSOR_RELEASE].MaxValue = 1000.0f;
-	Parameters[COMPRESSOR_RELEASE].Step = 0.1f;
-	Parameters[COMPRESSOR_RELEASE].DefaultValue = fHslider1;
-	Parameters[COMPRESSOR_RELEASE].SourceVariable = &fHslider1;
-	Parameters[COMPRESSOR_RELEASE].DisplayFormat = "{0:0.0}ms";
-	Parameters[COMPRESSOR_RELEASE].Description = "Compression release time (ms)";
+	auto& wetDryParam = AddParameter();
+	wetDryParam.Name = "Blend";
+	wetDryParam.DefaultValue = fVslider0;
+	wetDryParam.SourceVariable = &fVslider0;
+	wetDryParam.Description = "Wet/dry effect blend";
 
-	Parameters[COMPRESSOR_WETDRY].Name = "Blend";
-	Parameters[COMPRESSOR_WETDRY].DefaultValue = fVslider0;
-	Parameters[COMPRESSOR_WETDRY].SourceVariable = &fVslider0;
-	Parameters[COMPRESSOR_WETDRY].Description = "Wet/dry effect blend";
-
-	Parameters[COMPRESSOR_COMPRESSION].Name = "Comp";
-	Parameters[COMPRESSOR_COMPRESSION].DefaultValue = compression;
-	Parameters[COMPRESSOR_COMPRESSION].SourceVariable = &compression;
-	Parameters[COMPRESSOR_COMPRESSION].ParameterType = PARAMETER_TYPE_POWER;
-	Parameters[COMPRESSOR_COMPRESSION].RangePower = 4;	// Since it is linear, put it through a power function to make smaller values more visible
-	Parameters[COMPRESSOR_COMPRESSION].IsOutput = true;
-	Parameters[COMPRESSOR_COMPRESSION].Description = "Current amount of compression";
-
+	auto& compressionParam = AddParameter();
+	compressionParam.Name = "Comp";
+	compressionParam.DefaultValue = compression;
+	compressionParam.SourceVariable = &compression;
+	compressionParam.ParameterType = PARAMETER_TYPE_POWER;
+	compressionParam.RangePower = 4;	// Since it is linear, put it through a power function to make smaller values more visible
+	compressionParam.IsOutput = true;
+	compressionParam.Description = "Current amount of compression";
 }
 
 void Compressor::init(int samplingFreq)

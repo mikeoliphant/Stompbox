@@ -12,29 +12,29 @@ FreeVerb::FreeVerb()
 	fVslider1 = FAUSTFLOAT(0.5);
 	fVslider2 = FAUSTFLOAT(5);
 
-	NumParameters = REVERB_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& sizeParam = AddParameter();
+	sizeParam.Name = "Size";
+	sizeParam.SourceVariable = &fVslider1;
+	sizeParam.DisplayFormat = "{0:0.00}";
+	sizeParam.Description = "Room size";
 
-	Parameters[REVERB_ROOMSIZE].Name = "Size";
-	Parameters[REVERB_ROOMSIZE].SourceVariable = &fVslider1;
-	Parameters[REVERB_ROOMSIZE].DisplayFormat = "{0:0.00}";
-	Parameters[REVERB_ROOMSIZE].Description = "Room size";
+	auto& decayParam = AddParameter();
+	decayParam.Name = "Decay";
+	decayParam.SourceVariable = &fVslider2;
+	decayParam.MinValue = 0;
+	decayParam.MaxValue = 10;
+	decayParam.DefaultValue = fVslider2;
+	decayParam.DisplayFormat = "{0:0.0}";
+	decayParam.Description = "Length of reverb decay";
 
-	Parameters[REVERB_DECAY].Name = "Decay";
-	Parameters[REVERB_DECAY].SourceVariable = &fVslider2;
-	Parameters[REVERB_DECAY].MinValue = 0;
-	Parameters[REVERB_DECAY].MaxValue = 10;
-	Parameters[REVERB_DECAY].DefaultValue = fVslider2;
-	Parameters[REVERB_DECAY].DisplayFormat = "{0:0.0}";
-	Parameters[REVERB_DECAY].Description = "Length of reverb decay";
-
-	Parameters[REVERB_WETDRY].Name = "Blend";
-	Parameters[REVERB_WETDRY].SourceVariable = &fVslider0;
-	Parameters[REVERB_WETDRY].DefaultValue = fVslider0;
-	Parameters[REVERB_WETDRY].MaxValue = 100;
-	Parameters[REVERB_WETDRY].Step = 1;
-	Parameters[REVERB_WETDRY].DisplayFormat = "{0:0}";
-	Parameters[REVERB_WETDRY].Description = "Dry/wet effect blend";
+	auto& wetDryParam = AddParameter();
+	wetDryParam.Name = "Blend";
+	wetDryParam.SourceVariable = &fVslider0;
+	wetDryParam.DefaultValue = fVslider0;
+	wetDryParam.MaxValue = 100;
+	wetDryParam.Step = 1;
+	wetDryParam.DisplayFormat = "{0:0}";
+	wetDryParam.Description = "Dry/wet effect blend";
 }
 
 void FreeVerb::init(int samplingFreq)

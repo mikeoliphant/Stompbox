@@ -9,23 +9,22 @@ PitchDetector::PitchDetector(int bufferSize)
 
 	Name = "PitchDetector";
 
-	NumParameters = PITCHDETECTOR_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& muteParam = AddParameter();
+	muteParam.Name = "Mute";
+	muteParam.SourceVariable = &muteOutput;
+	muteParam.IsAdvanced = true;
+	muteParam.ParameterType = PARAMETER_TYPE_BOOL;
+	muteParam.MinValue = 0;
+	muteParam.MaxValue = 1;
+	muteParam.DefaultValue = 1;
 
-	Parameters[PITCHDETECTOR_MUTE].Name = "Mute";
-	Parameters[PITCHDETECTOR_MUTE].SourceVariable = &muteOutput;
-	Parameters[PITCHDETECTOR_MUTE].IsAdvanced = true;
-	Parameters[PITCHDETECTOR_MUTE].ParameterType = PARAMETER_TYPE_BOOL;
-	Parameters[PITCHDETECTOR_MUTE].MinValue = 0;
-	Parameters[PITCHDETECTOR_MUTE].MaxValue = 1;
-	Parameters[PITCHDETECTOR_MUTE].DefaultValue = 1;
-
-	Parameters[PITCHDETECTOR_PITCH].Name = "Pitch";
-	Parameters[PITCHDETECTOR_PITCH].SourceVariable = &currentPitch;
-	Parameters[PITCHDETECTOR_PITCH].IsOutput = true;
-	Parameters[PITCHDETECTOR_PITCH].MinValue = 0;
-	Parameters[PITCHDETECTOR_PITCH].MaxValue = 10000;
-	Parameters[PITCHDETECTOR_PITCH].DefaultValue = currentPitch;
+	auto& pitchParam = AddParameter();
+	pitchParam.Name = "Pitch";
+	pitchParam.SourceVariable = &currentPitch;
+	pitchParam.IsOutput = true;
+	pitchParam.MinValue = 0;
+	pitchParam.MaxValue = 10000;
+	pitchParam.DefaultValue = currentPitch;
 
 	pitchMPM = new PitchMPM(bufferSize);
 	buffer = new float[bufferSizeTimesTwo];

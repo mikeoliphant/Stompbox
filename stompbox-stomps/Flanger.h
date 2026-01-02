@@ -2,14 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	FLANGER_RATE,
-	FLANGER_DEPTH,
-	FLANGER_FEEDBACK,
-	FLANGER_NUMPARAMETERS
-};
-
 class Flanger : public StompBox
 {
 private:

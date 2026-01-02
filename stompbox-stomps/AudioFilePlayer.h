@@ -11,15 +11,6 @@
 #include "AudioFile.h"
 #include "FileType.h"
 
-enum
-{
-	AUDIOFILEPLAYER_FILE,
-	AUDIOFILEPLAYER_LEVEL,
-	AUDIOFILEPLAYER_PLAYING,
-	AUDIOFILEPLAYER_POSITION,
-	AUDIOFILEPLAYER_NUMPARAMETERS
-};
-
 class AudioFilePlayer : public StompBox
 {
 private:
@@ -42,7 +33,7 @@ public:
 	AudioFilePlayer(const std::string folderName, const std::vector<std::string> fileExtensions, const std::filesystem::path& basePath);
 	~AudioFilePlayer() {}
 	void SetFile();
-	void SetParameterValue(StompBoxParameter* parameter, float value);
+	void SetParameterValue(StompBoxParameter& parameter, float value);
 	void HandleCommand(const std::vector<std::string>& commandWords);
 
 	virtual void init(int samplingFreq);

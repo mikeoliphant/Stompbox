@@ -17,14 +17,12 @@ PeakingFilter::PeakingFilter(double freq, double q)
 	this->freq = freq;
 	this->q = q;
 
-	NumParameters = PEAKINGFILTER_NUMPARAMETERS;
-	CreateParameters(NumParameters);
-
-	Parameters[PEAKINGFILTER_LEVEL].Name = "Level";
-	Parameters[PEAKINGFILTER_LEVEL].MaxValue = -15;
-	Parameters[PEAKINGFILTER_LEVEL].MaxValue = 15;
-	Parameters[PEAKINGFILTER_LEVEL].SourceVariable = &fVslider0;
-	Parameters[PEAKINGFILTER_LEVEL].DefaultValue = fVslider0;
+	auto& levelParam = AddParameter();
+	levelParam.Name = "Level";
+	levelParam.MaxValue = -15;
+	levelParam.MaxValue = 15;
+	levelParam.SourceVariable = &fVslider0;
+	levelParam.DefaultValue = fVslider0;
 }
 
 void PeakingFilter::init(int samplingFreq)

@@ -13,27 +13,25 @@ HighLowFilter::HighLowFilter()
 	Name = "HighPass";
 	Description = "Dual high/low pass filter";
 
-	NumParameters = HIGHLOWFILTER_NUMPARAMETERS;
-	CreateParameters(NumParameters);
+	auto& lowParam = AddParameter();
+	lowParam.Name = "Low";
+	lowParam.MinValue = 1;
+	lowParam.MaxValue = 500;
+	lowParam.SourceVariable = &lowFreq;
+	lowParam.DefaultValue = lowFreq;
+	lowParam.RangePower = 3;
+	lowParam.DisplayFormat = "{0:0}hz";
+	lowParam.Description = "Low cut (high pass) frequency";
 
-	Parameters[HIGHLOWFILTER_LOW_FREQUENCY].Name = "Low";
-	Parameters[HIGHLOWFILTER_LOW_FREQUENCY].MinValue = 1;
-	Parameters[HIGHLOWFILTER_LOW_FREQUENCY].MaxValue = 500;
-	Parameters[HIGHLOWFILTER_LOW_FREQUENCY].SourceVariable = &lowFreq;
-	Parameters[HIGHLOWFILTER_LOW_FREQUENCY].DefaultValue = lowFreq;
-	Parameters[HIGHLOWFILTER_LOW_FREQUENCY].RangePower = 3;
-	Parameters[HIGHLOWFILTER_LOW_FREQUENCY].DisplayFormat = "{0:0}hz";
-	Parameters[HIGHLOWFILTER_LOW_FREQUENCY].Description = "Low cut (high pass) frequency";
-
-
-	Parameters[HIGHLOWFILTER_HIGH_FREQUENCY].Name = "High";
-	Parameters[HIGHLOWFILTER_HIGH_FREQUENCY].MinValue = 1000;
-	Parameters[HIGHLOWFILTER_HIGH_FREQUENCY].MaxValue = 20000;
-	Parameters[HIGHLOWFILTER_HIGH_FREQUENCY].SourceVariable = &highFreq;
-	Parameters[HIGHLOWFILTER_HIGH_FREQUENCY].DefaultValue = highFreq;
-	Parameters[HIGHLOWFILTER_HIGH_FREQUENCY].RangePower = 2;
-	Parameters[HIGHLOWFILTER_HIGH_FREQUENCY].DisplayFormat = "{0:0}hz";
-	Parameters[HIGHLOWFILTER_HIGH_FREQUENCY].Description = "High cut (low pass) frequency";
+	auto& highParam = AddParameter();
+	highParam.Name = "High";
+	highParam.MinValue = 1000;
+	highParam.MaxValue = 20000;
+	highParam.SourceVariable = &highFreq;
+	highParam.DefaultValue = highFreq;
+	highParam.RangePower = 2;
+	highParam.DisplayFormat = "{0:0}hz";
+	highParam.Description = "High cut (low pass) frequency";
 }
 
 void HighLowFilter::init(int samplingFreq)

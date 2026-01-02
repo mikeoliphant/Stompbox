@@ -2,13 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	HIGHLOWFILTER_LOW_FREQUENCY,
-	HIGHLOWFILTER_HIGH_FREQUENCY,
-	HIGHLOWFILTER_NUMPARAMETERS
-};
-
 class HighLowFilter : public StompBox
 {
 private:

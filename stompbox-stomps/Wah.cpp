@@ -15,12 +15,11 @@ Wah::Wah()
 
 	fVslider0 = FAUSTFLOAT(0.5);
 
-	NumParameters = WAH_NUMPARAMETERS;
-	CreateParameters(NumParameters);
-	Parameters[WAH_LEVEL].Name = "Wah";
-	Parameters[WAH_LEVEL].DefaultValue = fVslider0;
-	Parameters[WAH_LEVEL].SourceVariable = &fVslider0;
-	Parameters[WAH_LEVEL].Description = "Effect strength";
+	auto& levelParam = AddParameter();
+	levelParam.Name = "Wah";
+	levelParam.DefaultValue = fVslider0;
+	levelParam.SourceVariable = &fVslider0;
+	levelParam.Description = "Effect strength";
 }
 
 void Wah::init(int samplingFreq)

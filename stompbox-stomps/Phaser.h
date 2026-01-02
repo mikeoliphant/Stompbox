@@ -2,16 +2,6 @@
 
 #include "StompBox.h"
 
-enum
-{
-	PHASER_SPEED,
-	PHASER_DEPTH,
-	PHASER_FEEDBACK,
-	PHASER_FREQWIDTH,
-	PHASER_RATIO,
-	PHASER_NUMPARAMETERS
-};
-
 class Phaser : public StompBox
 {
 private:
