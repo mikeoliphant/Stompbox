@@ -376,12 +376,12 @@ std::string PluginProcessor::DumpConfig()
         dump.append("\r\n");
 
         if (plugin->InputGain != nullptr)
-            AppendParamDef(dump, *plugin->InputGain->GetParameter(0));
+            AppendParamDef(dump, *plugin->InputGain->GetParameter("Gain"));
 
         AppendParamDefs(dump, *plugin);
 
         if (plugin->OutputVolume != nullptr)
-            AppendParamDef(dump, *plugin->OutputVolume->GetParameter(0));
+            AppendParamDef(dump, *plugin->OutputVolume->GetParameter("Volume"));
 
         dump.append("EndConfig\r\n");
     }
