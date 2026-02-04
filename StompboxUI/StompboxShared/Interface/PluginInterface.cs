@@ -683,6 +683,8 @@ namespace Stompbox
 
             Child = new NinePatchWrapper(Layout.Current.GetImage("PluginBackground")) { Child = controlDock, Color = backgroundColor, HorizontalAlignment = EHorizontalAlignment.Stretch, VerticalAlignment = EVerticalAlignment.Stretch };
 
+            menuItems.Clear();
+
             AddControls(controlDock);
         }
 
@@ -693,8 +695,6 @@ namespace Stompbox
 
         protected override void AddControls(Dock dock)
         {
-            menuItems.Clear();
-
             if (showOptionsMenu && (ChainDisplay != null))
             {
                 AddMenuItem(new ContextMenuItem
