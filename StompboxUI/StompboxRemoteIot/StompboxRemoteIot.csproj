@@ -21,6 +21,6 @@
 
 	<Import Project="..\StompboxShared\StompboxShared.projitems" Label="Shared" />
 
-	<Import Project="..\..\..\UILayout\UILayout.Skia\UILayout.Skia.projitems" Label="Shared" />
+	<Import Project="..\..\Dependencies\UILayout\UILayout.Skia\UILayout.Skia.projitems" Label="Shared" />
 
 </Project>

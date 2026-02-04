@@ -48,9 +48,9 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UILayout.DefaultTextures", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StompboxRemoteIot", "StompboxRemoteIot\StompboxRemoteIot.csproj", "{F66ADECA-3357-4561-88D5-C8AD5FE914B6}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UILayout.Skia", "..\..\UILayout\UILayout.Skia\UILayout.Skia.shproj", "{43920506-574A-4227-9759-5C55C3D54A9A}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "StompboxMonoGame", "StompboxMonoGame\StompboxMonoGame.shproj", "{E2B7AAED-BEF4-4157-A4B6-10CD85288529}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UILayout.Skia", "..\Dependencies\UILayout\UILayout.Skia\UILayout.Skia.shproj", "{43920506-574A-4227-9759-5C55C3D54A9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -455,7 +455,7 @@ Global
 		StompboxShared\StompboxShared.projitems*{2ebe19f9-83f1-4209-9189-fd552c959dd7}*SharedItemsImports = 5
 		StompboxMonoGame\StompboxMonoGame.projitems*{428f3d8a-d221-4f75-b1d6-f409b91fb7df}*SharedItemsImports = 5
 		StompboxShared\StompboxShared.projitems*{428f3d8a-d221-4f75-b1d6-f409b91fb7df}*SharedItemsImports = 5
-		..\..\UILayout\UILayout.Skia\UILayout.Skia.projitems*{43920506-574a-4227-9759-5c55c3d54a9a}*SharedItemsImports = 13
+		..\Dependencies\UILayout\UILayout.Skia\UILayout.Skia.projitems*{43920506-574a-4227-9759-5c55c3d54a9a}*SharedItemsImports = 13
 		StompboxMonoGame\StompboxMonoGame.projitems*{49305251-662e-459a-9adf-9866ceb6c4d2}*SharedItemsImports = 5
 		StompboxShared\StompboxShared.projitems*{49305251-662e-459a-9adf-9866ceb6c4d2}*SharedItemsImports = 5
 		StompboxClient\StompboxAPIBase\StompboxAPIBase.projitems*{71c8dc9a-fe7f-516c-5f91-abda855b9d26}*SharedItemsImports = 5
@@ -476,8 +476,8 @@ Global
 		StompboxMonoGame\StompboxMonoGame.projitems*{e2b7aaed-bef4-4157-a4b6-10cd85288529}*SharedItemsImports = 13
 		StompboxClient\StompboxAPIBase\StompboxAPIBase.projitems*{ef794465-7976-4ad3-b2cc-dea7a85a80ae}*SharedItemsImports = 13
 		..\Dependencies\UILayout\UILayout.DefaultTextures\UILayout.DefaultTextures.projitems*{f66adeca-3357-4561-88d5-c8ad5fe914b6}*SharedItemsImports = 5
+		..\Dependencies\UILayout\UILayout.Skia\UILayout.Skia.projitems*{f66adeca-3357-4561-88d5-c8ad5fe914b6}*SharedItemsImports = 5
 		..\Dependencies\UILayout\UILayout\UILayout.projitems*{f66adeca-3357-4561-88d5-c8ad5fe914b6}*SharedItemsImports = 5
 		StompboxShared\StompboxShared.projitems*{f66adeca-3357-4561-88d5-c8ad5fe914b6}*SharedItemsImports = 5
-		..\..\UILayout\UILayout.Skia\UILayout.Skia.projitems*{f66adeca-3357-4561-88d5-c8ad5fe914b6}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
