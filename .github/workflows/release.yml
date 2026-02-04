@@ -45,7 +45,7 @@ jobs:
       run: |
         dotnet build -c Release StompboxUI\StompboxImageProcessor
         cd StompboxUI\StompboxImageProcessor\bin\Release\net8.0
-        .\StompboxUI\StompboxImageProcessor.exe
+        .\StompboxImageProcessor.exe
         
     - name: Build Plugin
       working-directory: ${{github.workspace}}
