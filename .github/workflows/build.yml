@@ -45,11 +45,11 @@ jobs:
         name: StompboxRemote
         path: ${{github.workspace}}\StompboxUI\StompboxRemote\bin\Release\net8.0-windows
 
-    - name: Setup Java
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'microsoft'
-        java-version: '17'
+#    - name: Setup Java
+#      uses: actions/setup-java@v3
+#      with:
+#        distribution: 'microsoft'
+#        java-version: '17'
 
 #    - name: Build Android Remote
 #      run: |
