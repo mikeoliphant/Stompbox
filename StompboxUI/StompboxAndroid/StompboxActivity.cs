@@ -40,7 +40,9 @@ namespace Stompbox
 
             InterfaceBase.InterfaceType = EStompboxInterfaceType.Mobile;
 
-            StompboxLayout game = new StompboxLayout();
+            MonoGameLayout.DefaultTextureNamespace = "StompboxAndroid";
+
+            StompboxLayout layout = new StompboxLayout();
 
             //game.SetScreenScale(scale, resizeScreen: true);
 
@@ -53,7 +55,7 @@ namespace Stompbox
 
             SetContentView(view);
 
-            GameHost.StartGame(game);
+            GameHost.StartGame(layout);
         }
     }
 }
