@@ -693,6 +693,8 @@ namespace Stompbox
 
         protected override void AddControls(Dock dock)
         {
+            menuItems.Clear();
+
             if (showOptionsMenu && (ChainDisplay != null))
             {
                 AddMenuItem(new ContextMenuItem

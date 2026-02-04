@@ -10,8 +10,8 @@
 		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="AudioPlugSharp" Version="0.7.3" />
-		<PackageReference Include="AudioPlugSharpVst3" Version="0.7.3" />
+		<PackageReference Include="AudioPlugSharp" Version="0.7.9" />
+		<PackageReference Include="AudioPlugSharpVst3" Version="0.7.9" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.4" />
 		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
