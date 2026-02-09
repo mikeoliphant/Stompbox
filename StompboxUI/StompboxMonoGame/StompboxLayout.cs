@@ -71,6 +71,14 @@ namespace Stompbox
                 StompboxLayout.Instance.Scale = desiredScale;
         }
 
+        public void SetReferenceWidth(float width)
+        {
+            float desiredScale = (Layout.Current as MonoGameLayout).UnscaledBounds.Width / width;
+
+            if (StompboxLayout.Instance.Scale != desiredScale)
+                StompboxLayout.Instance.Scale = desiredScale;
+        }
+
         public void Connect()
         {
             clientConnected = false;

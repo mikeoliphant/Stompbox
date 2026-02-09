@@ -22,6 +22,10 @@ namespace Stompbox
         {
         }
 
+        public void SetReferenceWidth(float width)
+        {
+        }
+
         public void Connect()
         {
             Console.WriteLine("Connecting to Stompbox");

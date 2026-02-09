@@ -226,7 +226,7 @@ namespace Stompbox
         {
             base.DrawContents();
 
-            (Layout.Current as StompboxLayout).SetReferenceHeight(1920.0f);
+            (Layout.Current as StompboxLayout).SetReferenceWidth(1080.0f);
 
             if (StompboxClient.Instance.NeedUIReload)
             {
