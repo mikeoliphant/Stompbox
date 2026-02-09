@@ -165,7 +165,7 @@ const char* DumpSettings(void* processor)
 
 const char* DumpProgram(void* processor)
 {
-    auto program = ((PluginProcessor*)processor)->DumpProgram();
+    auto program = ((PluginProcessor*)processor)->DumpProgram(false);
 
     size_t len = program.length() + 1;
     char* buff = (char*)CoTaskMemAlloc(len);

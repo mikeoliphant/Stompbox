@@ -1056,7 +1056,8 @@ namespace Stompbox
                 {
                     if (param.IsOutput)
                     {
-                        param.Value = param.Value;
+                        if (param.SetValue != null)
+                            param.SetValue(param.Value);
                     }
                 }
             }

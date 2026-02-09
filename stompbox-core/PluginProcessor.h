@@ -250,7 +250,7 @@ public:
 	void SaveSettings();
 	bool LoadCommandsFromFile(std::filesystem::path filePath);
 	std::string DumpSettings();
-	std::string DumpProgram();
+	std::string DumpProgram(bool isMaster);
 	std::string DumpConfig();
 	void Process(float* input, float* output, size_t count);
 	void StartRamp(int rampDirection, float rampMS);

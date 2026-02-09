@@ -74,8 +74,6 @@ PluginProcessor::PluginProcessor(std::filesystem::path dataPath)
 
     needPluginUpdate = true;
 
-    LoadSettings();
-
     serialDisplayInterface.Connect();
 
     //StartServer();
@@ -582,6 +580,8 @@ std::string PluginProcessor::DumpSettings()
 {
     std::string dump;
 
+    dump.append(DumpProgram(true));
+
     if (modeChangeCC != -1)
     {
         dump.append("MapModeController ");
@@ -604,7 +604,7 @@ std::string PluginProcessor::DumpSettings()
     return dump;
 }
 
-std::string PluginProcessor::DumpProgram()
+std::string PluginProcessor::DumpProgram(bool isMaster)
 {
     std::string dump;
 
@@ -614,8 +614,7 @@ std::string PluginProcessor::DumpProgram()
 
     for (auto& element : chainList)
     {
-        // Only non-"Master" elements get saved in preset
-        if (!element->IsMaster)
+        if (element->IsMaster == isMaster)
         {
             if (element->IsChain)
             {
@@ -647,24 +646,27 @@ std::string PluginProcessor::DumpProgram()
         }
     }
 
-    for (auto& entry : ccMapEntries)
+    if (!isMaster)
     {
-        dump.append("MapController ");
-        dump.append(std::to_string(entry.CCNumber));
-        dump.append(" ");
-        dump.append(entry.Plugin->ID);
-
-        if (entry.Parameter.empty())
+        for (auto& entry : ccMapEntries)
         {
-            dump.append(" Enabled");
-        }
-        else
-        {
+            dump.append("MapController ");
+            dump.append(std::to_string(entry.CCNumber));
             dump.append(" ");
-            dump.append(entry.Parameter);
-        }
+            dump.append(entry.Plugin->ID);
 
-        dump.append("\r\n");
+            if (entry.Parameter.empty())
+            {
+                dump.append(" Enabled");
+            }
+            else
+            {
+                dump.append(" ");
+                dump.append(entry.Parameter);
+            }
+
+            dump.append("\r\n");
+        }
     }
 
     dump.append("EndProgram\r\n");
@@ -1015,7 +1017,7 @@ std::string PluginProcessor::HandleCommand(std::string const& line)
                 if (commandWords[1] == "Program")
                 {
                     SendClientMessage(DumpSettings());
-                    SendClientMessage(DumpProgram());
+                    SendClientMessage(DumpProgram(false));
                 }
                 else if (commandWords[1] == "Config")
                 {
@@ -1053,7 +1055,7 @@ std::string PluginProcessor::HandleCommand(std::string const& line)
             {
                 currentPreset = commandWords[1];
 
-                std::string dump = DumpProgram();
+                std::string dump = DumpProgram(false);
 
                 std::filesystem::path outPath;
                 
@@ -1474,7 +1476,7 @@ void PluginProcessor::ThreadLoadPreset()
 
     if (stompboxServer.HaveClient())
     {
-        std::string dump = DumpProgram();
+        std::string dump = DumpProgram(false);
 
         SendClientMessage(dump);
     }

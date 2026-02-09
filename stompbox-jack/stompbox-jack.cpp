@@ -276,6 +276,8 @@ int main(int argc, char* argv[])
     guitarProcessor->HandleCommand("SetPluginSlot Tonestack EQ-7");
     guitarProcessor->HandleCommand("SetPluginSlot Cabinet Cabinet");
 
+    guitarProcessor->LoadSettings();
+
     if (preset_name != NULL)
     {
         guitarProcessor->LoadPreset(preset_name);
