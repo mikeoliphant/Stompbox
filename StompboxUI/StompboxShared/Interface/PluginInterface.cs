@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using UILayout;
 
 namespace Stompbox
@@ -458,7 +460,7 @@ namespace Stompbox
         {
             bool showOpenFolder = !StompboxClient.Instance.InClientMode;
 
-            FileInterface fileInterface = new FileInterface(showOpenFolder ? parameter.FilePath : null, parameter.EnumValues, foregroundColor)
+            FileInterface fileInterface = new FileInterface(parameter.Name, showOpenFolder ? parameter.FilePath : null, parameter.EnumValues, foregroundColor)
             {
                 HorizontalAlignment = EHorizontalAlignment.Stretch,
                 VerticalAlignment = EVerticalAlignment.Top,
@@ -1401,26 +1403,23 @@ namespace Stompbox
 
         public int SelectedIndex
         {
-            get { return selectedIndex - indexOffset; }
+            get { return selectedIndex; }
         }
 
         public string SelectedIndexValue
         {
-            get { return (selectedIndex < indexOffset) ? null : menuItems[selectedIndex].Text; }
+            get { return (selectedIndex < 0) ? null : EnumValues[selectedIndex].ToString(); }
         }
 
-        Menu menu;
         TextButton button;
-        List<MenuItem> menuItems;
         int selectedIndex = -1;
         string noSelectionText = "---";
-        int indexOffset = 0;
+        string name;
+        string filePath;
 
-        public FileInterface(string filePath, IList<string> enumValues, UIColor textColor)
+        public FileInterface(string name, string filePath, IList<string> enumValues, UIColor textColor)
         {
-            menuItems = new List<MenuItem>();
-
-            menu = new Menu();
+            this.name = name;
 
             SetEnumValues(filePath, enumValues);
 
@@ -1430,43 +1429,102 @@ namespace Stompbox
                 HorizontalAlignment = EHorizontalAlignment.Stretch,
                 ClickAction = delegate
                 {
-                    if (menuItems.Count > 0)
-                        Layout.Current.ShowPopup(menu, button.ContentBounds.Center);
+                    if (enumValues.Count > 0)
+                        ShowMenu();
                 }
             };
 
             Children.Add(button);
         }
 
-        public void SetEnumValues(string filePath, IList<string> enumValues)
+        string GetEnumString(UIFont font, int enumPos, float maxWidth)
         {
-            this.EnumValues = enumValues;
+            string str = EnumValues[enumPos].ToString();
 
-            string selectedString = null;
+            float width;
+            float height;
 
-            if ((selectedIndex >= 0) && (selectedIndex < menuItems.Count))
+            font.MeasureString("....", out width, out height);
+
+            maxWidth -= width;
+
+            for (int i = 0; i < (str.Length - 1); i++)
             {
-                selectedString = menuItems[selectedIndex].Text;
-            }
-            else
-            {
-                selectedString = null;
+                font.MeasureString(str.AsSpan(0, i + 1), out width, out height);
+
+                if (width > maxWidth)
+                {
+                    return str.Substring(0, i) + "...";
+                }
             }
 
-            if (menuItems.Count > 0)
+            return str;
+        }
+
+        void ShowMenu()
+        {
+            Dock dock = new Dock();
+
+            VerticalStack popupStack = new VerticalStack();
+
+            dock.Children.Add(popupStack);
+
+            var wrapper = new PopupWrapper(dock);
+
+            List<string> enumStrings = new();
+
+            SwipeList swipeList = new SwipeList();
+            swipeList.BackgroundColor = UIColor.Black;
+            swipeList.DesiredWidth = 600;
+
+            for (int i = 0; i < EnumValues.Count; i++)
             {
-                menuItems.Clear();
+                enumStrings.Add(GetEnumString(swipeList.Font, i, swipeList.DesiredWidth));
             }
 
-            int i = 0;
+            swipeList.DesiredHeight = Math.Min(EnumValues.Count * swipeList.ItemHeight, Layout.Current.Bounds.Height * 0.8f);
+
+            swipeList.Items = enumStrings;
+
+            swipeList.SelectAction = delegate (int selectedIndex)
+            {
+                SetSelectedIndex(selectedIndex);
+
+                if (SelectionChangedAction != null)
+                    SelectionChangedAction(selectedIndex);
+
+                if (wrapper.CloseAction != null)
+                    wrapper.CloseAction();
+            };
+
+            popupStack.Children.Add(new UIElement()
+            {
+                DesiredHeight = swipeList.ItemHeight
+            });
+
+            popupStack.Children.Add(swipeList);
+
+            dock.Children.Add(new UIElementWrapper
+            {
+                HorizontalAlignment = EHorizontalAlignment.Stretch,
+                VerticalAlignment = EVerticalAlignment.Top,
+                BackgroundColor = new UIColor(50, 50, 50),
+                DesiredHeight = swipeList.ItemHeight,
+                Child = new TextBlock(name)
+                {
+                    HorizontalAlignment = EHorizontalAlignment.Center,
+                    VerticalAlignment = EVerticalAlignment.Center,
+                }
+            });
 
             if (!string.IsNullOrEmpty(filePath))
             {
-                menuItems.Add(new ContextMenuItem
+                popupStack.Children.Add(new TextButton("Open Folder")
                 {
-                    Text = "Open " + filePath + " Folder",
-                    CloseOnSelect = true,
-                    AfterCloseAction = delegate
+                    HorizontalAlignment = EHorizontalAlignment.Stretch,
+                    VerticalAlignment = EVerticalAlignment.Bottom,
+                    BackgroundColor = new UIColor(50, 50, 50),
+                    ClickAction = delegate
                     {
                         try
                         {
@@ -1475,74 +1533,44 @@ namespace Stompbox
                         catch { }
                     }
                 });
-
-                indexOffset = 1;
-
-                i++;
             }
-
-            foreach (string enumValue in enumValues)
+            else
             {
-                int index = i++;
-
-                menuItems.Add(new ContextMenuItem
+                popupStack.Children.Add(new UIElement()
                 {
-                    Text = enumValue,
-                    CloseOnSelect = true,
-                    AfterCloseAction = delegate
-                    {
-                        SetSelectedIndex(index - indexOffset);
-
-                        if (SelectionChangedAction != null)
-                            SelectionChangedAction(index - indexOffset);
-
-                        UpdateContentLayout();
-                    }
+                    HorizontalAlignment = EHorizontalAlignment.Stretch,
+                    VerticalAlignment = EVerticalAlignment.Bottom,
+                    DesiredHeight = swipeList.ItemHeight,
+                    BackgroundColor = new UIColor(50, 50, 50)
                 });
             }
 
-            menu.SetMenuItems(menuItems);
+            Layout.Current.ShowPopup(wrapper, button.ContentBounds.Center);
+        }
 
-            if (selectedString != null)
-            {
-                int index = 0;
-
-                foreach (ContextMenuItem item in menuItems)
-                {
-                    if (item.Text == selectedString)
-                    {
-                        selectedIndex = index;
-
-                        break;
-                    }
-
-                    index++;
-                }
-
-                SetSelectedIndex(selectedIndex);
-            }
-
-            UpdateContentLayout();
+        public void SetEnumValues(string filePath, IList<string> enumValues)
+        {
+            this.filePath = filePath;
+            this.EnumValues = enumValues;
         }
 
         public void SetSelectedIndex(int index)
         {
-            selectedIndex = index + indexOffset;
+            selectedIndex = index;
 
-            if ((selectedIndex < indexOffset) || (selectedIndex >= menuItems.Count))
+            if (selectedIndex < 0)
             {
                 button.Text = "---";
             }
             else
             {
-                if (menuItems.Count > selectedIndex)
+                if (EnumValues.Count > selectedIndex)
                 {
-                    button.Text = menuItems[selectedIndex].Text;
+                    button.Text = EnumValues[selectedIndex].ToString();
                 }
             }
         }
     }
-
 
     public class ParameterDial : Dock
     {
