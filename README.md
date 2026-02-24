@@ -151,4 +151,6 @@ Some more complicated MIDI stomp-based UI is also available if you are running t
 
 Stompbox has built-in support for talking to a USB-connected microcontroller with display. I'm using a [Wio Terminal ](https://www.seeedstudio.com/Wio-Terminal-p-4509.html), but any Arduino-compatible microcontroller with an SPI display should work. It requires installing my [SerialTFT](https://github.com/mikeoliphant/SerialTFT) Arduino sketch on the microcontroller.
 
+# Web interface
 
+[alscos](https://github.com/alscos) has created web-based interface for controlling Stompbox. It can be found here: [https://github.com/alscos/Namnesis](https://github.com/alscos/Namnesis).
