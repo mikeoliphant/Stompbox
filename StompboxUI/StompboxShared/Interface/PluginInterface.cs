@@ -207,7 +207,7 @@ namespace Stompbox
 
         public override bool HandleTouch(in Touch touch)
         {
-            if (!ContentBounds.Contains(touch.Position))
+            if (!HaveTouchCapture && !ContentBounds.Contains(touch.Position))
             {
                 CloseAction();
 
