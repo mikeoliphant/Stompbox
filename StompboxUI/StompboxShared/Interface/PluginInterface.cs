@@ -1437,10 +1437,8 @@ namespace Stompbox
             Children.Add(button);
         }
 
-        string GetEnumString(UIFont font, int enumPos, float maxWidth)
+        string EllipsisToMaxLength(string str, UIFont font, float maxWidth)
         {
-            string str = EnumValues[enumPos].ToString();
-
             float width;
             float height;
 
@@ -1458,7 +1456,14 @@ namespace Stompbox
                 }
             }
 
-            return str;
+            return str;            
+        }
+
+        string GetEnumString(UIFont font, int enumPos, float maxWidth)
+        {
+            string str = EnumValues[enumPos].ToString();
+
+            return EllipsisToMaxLength(str, font, maxWidth);
         }
 
         void ShowMenu()
@@ -1566,7 +1571,7 @@ namespace Stompbox
             {
                 if (EnumValues.Count > selectedIndex)
                 {
-                    button.Text = EnumValues[selectedIndex].ToString();
+                    button.Text = EllipsisToMaxLength(EnumValues[selectedIndex].ToString(), button.TextFont, 600);
                 }
             }
         }
