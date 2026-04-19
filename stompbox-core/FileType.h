@@ -36,7 +36,10 @@ public:
 		{
 			for (const auto& entry : std::filesystem::directory_iterator(folderPath))
 			{
-				auto extension = entry.path().filename().extension();
+				auto extension = entry.path().extension().string();
+
+				std::transform(extension.begin(), extension.end(), extension.begin(),
+					[](unsigned char c) { return std::tolower(c); });
 
 				for (const auto& fileExtension : fileExtensions)
 				{
