@@ -1,6 +1,6 @@
 ﻿Stompbox
 
-Copyright (c) 2024-2025 Mike Oliphant
+Copyright (c) 2024-2026 Mike Oliphant
 
 Source code and license information can be found here:
 
@@ -19,4 +19,4 @@ https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 If you are still having trouble getting the plugin to work, please check out
 troubleshooting instructions here:
 
-https://github.com/mikeoliphant/StompboxUI/blob/master/StompboxPlugin/Troubleshooting.md
+https://github.com/mikeoliphant/Stompbox/blob/master/StompboxUI/StompboxPlugin/Troubleshooting.md
