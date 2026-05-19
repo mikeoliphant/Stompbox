@@ -17,6 +17,16 @@ NAM::NAM(const std::string folderName, const std::vector<std::string> fileExtens
     modelParam.Description = "Selected NAM model";
     modelParam.MinValue = -1;
     modelParam.MaxValue = (float)(fileType.GetFileNames().size()) - 1;
+
+    auto& qualityParam = AddParameter();
+    qualityParam.Name = "Quality";
+    qualityParam.SourceVariable = &qualityScale;
+    qualityParam.ParameterType = PARAMETER_TYPE_KNOB;
+    qualityParam.DefaultValue = 1.0f;
+    qualityParam.Description = "Model quality scale factor";
+    qualityParam.MinValue = 0.0f;
+    qualityParam.MaxValue = 1.0f;
+    qualityParam.IsAdvanced = true;
 }
 
 void NAM::init(int samplingFreq)
@@ -43,6 +53,13 @@ void NAM::compute(int count, float* input, float* output)
         memcpy(output, input, count * sizeof(float));
 
         return;
+    }
+
+    if (qualityScale != currentQualityScale)
+    {
+        activeModel->SetQualityScaleFactor(qualityScale);
+
+        currentQualityScale = qualityScale;
     }
 
     activeModel->Process(input, output, count);
