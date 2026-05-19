@@ -4,7 +4,7 @@ add_library(stompbox-capi SHARED ${SOURCES})
 
 include_directories(stompbox-capi ../stompbox-stomps ../stompbox-core)
 
-target_link_libraries(stompbox-capi PRIVATE stompbox-stomps stompbox-core)
+target_link_libraries(stompbox-capi PRIVATE stompbox-stomps stompbox-core NeuralAudio)
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCES})
 

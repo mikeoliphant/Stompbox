@@ -24,7 +24,7 @@ if(JACK_LIB)
 	include_directories(stompbox-jack ${STOMPBOX_DEPS_PATH}/denormal)
 	include_directories(stompbox-jack ../stompbox-stomps)
 
-	target_link_libraries(stompbox-jack PUBLIC ${JACK_LIB} PRIVATE stompbox-core stompbox-stomps)
+	target_link_libraries(stompbox-jack PUBLIC ${JACK_LIB} PRIVATE stompbox-core stompbox-stomps NeuralAudio)
 
 	target_compile_features(stompbox-jack PUBLIC cxx_std_17)
 
