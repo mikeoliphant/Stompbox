@@ -37,6 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: ghcr.io/tttapa/docker-arm-cross-toolchain:aarch64-rpi3-linux-gnu-gcc12
+      options: --user root
     env:
       ARCHIVE_NAME: stompbox-jack-${{ matrix.native_arch }}.tgz
     steps:
