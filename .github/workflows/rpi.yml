@@ -37,7 +37,10 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: ghcr.io/tttapa/docker-arm-cross-toolchain:aarch64-rpi3-linux-gnu-gcc12
-      options: --user root
+      entrypoint: '/bin/bash'
+      args:
+        - '-c'
+        - 'apt-get update && apt-get install -y libjack-jackd2-dev
     env:
       ARCHIVE_NAME: stompbox-jack-${{ matrix.native_arch }}.tgz
     steps:
@@ -48,7 +51,6 @@ jobs:
     - name: Build stompbox-jack
       working-directory: ${{github.workspace}}/build
       run: |
-        apt-get update && apt-get install -y libjack-jackd2-dev
         cmake .. -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE=/home/develop/opt/x-tools/aarch64-rpi3-linux-gnu/aarch64-${{ matrix.native_arch }}-linux-gnu.toolchain.cmake
         make -j4
 
