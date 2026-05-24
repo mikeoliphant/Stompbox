@@ -47,7 +47,7 @@ jobs:
     - name: Build stompbox-jack
       working-directory: ${{github.workspace}}/build
       run: |
-        sudo apt-get install libjack-jackd2-dev
+        apt-get update && apt-get install -y libjack-jackd2-dev
         cmake .. -DCMAKE_BUILD_TYPE="Release"
         make -j4
 
