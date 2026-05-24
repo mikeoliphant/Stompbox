@@ -40,7 +40,7 @@ jobs:
       entrypoint: '/bin/bash'
       args:
         - '-c'
-        - 'apt-get update && apt-get install -y libjack-jackd2-dev
+        - 'apt-get update && apt-get install -y libjack-jackd2-dev'
     env:
       ARCHIVE_NAME: stompbox-jack-${{ matrix.native_arch }}.tgz
     steps:
