@@ -4,7 +4,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 		PATHS C:/Program\ Files/JACK2/lib)
 else()
 	find_library(JACK_LIB libjack.so)
-	link_libraries(stdc++fs pthread)
+	link_libraries(stdc++fs)
 endif()
 
 if(JACK_LIB)
@@ -16,6 +16,10 @@ if(JACK_LIB)
 	)
 
 	add_executable(stompbox-jack stompbox-jack.cpp)
+	
+	set(THREADS_PREFER_PTHREAD_FLAG ON)
+	find_package(Threads REQUIRED)
+	target_link_libraries(stompbox-jack PRIVATE Threads::Threads)
 
 	# Should remove all of these - PluginProcessor.h pulls them in
 	include_directories(stompbox-jack ${STOMPBOX_DEPS_PATH}/eigen)
