@@ -37,10 +37,6 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: ghcr.io/tttapa/docker-arm-cross-toolchain:aarch64-rpi3-linux-gnu-gcc12
-      entrypoint: '/bin/bash'
-      args:
-        - '-c'
-        - 'apt-get update && apt-get install -y libjack-jackd2-dev'
     env:
       ARCHIVE_NAME: stompbox-jack-${{ matrix.native_arch }}.tgz
     steps:
