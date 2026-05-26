@@ -49,6 +49,7 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: |
         wget https://github.com/mikeoliphant/jack-dev-rpi/raw/refs/heads/main/jackdev.tgz
+        tar -xzf jackdev.tgz
         cp -r jackdev/lib/* /home/develop/opt/x-tools/aarch64-rpi3-linux-gnu/aarch64-rpi3-linux-gnu/sysroot/usr/lib/
         cp -r jackdev/include/* /home/develop/opt/x-tools/aarch64-rpi3-linux-gnu/aarch64-rpi3-linux-gnu/sysroot/usr/include
         cmake .. -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE=/home/develop/opt/x-tools/aarch64-rpi3-linux-gnu/aarch64-${{ matrix.native_arch }}-linux-gnu.toolchain.cmake
