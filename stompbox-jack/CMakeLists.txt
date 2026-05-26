@@ -1,6 +1,3 @@
-message(STATUS "Prefix Path: ${CMAKE_PREFIX_PATH}")
-message(STATUS "Library Path: ${CMAKE_LIBRARY_PATH}")
-
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	find_library(JACK_LIB
 		NAMES libjack64.lib
