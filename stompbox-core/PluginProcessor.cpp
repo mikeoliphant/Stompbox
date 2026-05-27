@@ -50,7 +50,7 @@ void GetDataPathFromModule(std::filesystem::path& dataPath)
 
 std::string PluginProcessor::GetVersion()
 {
-    return "stompbox v0.2.0 - Copyright 2023-2026 Mike Oliphant";
+    return "stompbox v0.2.1 - Copyright 2023-2026 Mike Oliphant";
 }
 
 PluginProcessor::PluginProcessor(std::filesystem::path dataPath)
