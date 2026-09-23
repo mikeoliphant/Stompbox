@@ -87,7 +87,8 @@ namespace Stompbox
             if (forceFull)
             {
                 SetWindow(0, 0, ScreenWidth, ScreenHeight);
-                SendSPI(MemoryMarshal.Cast<Rgb565, byte>(_screenBuffer));
+
+                SendSPI((Span<byte>)MemoryMarshal.Cast<Rgb565, byte>(_screenBuffer.AsSpan()));
             }
             else
             {
