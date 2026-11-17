@@ -61,11 +61,13 @@ Files, such as NAM models, impulse responses, etc. go in your local user roaming
 First clone the repository:
 ```bash
 git clone --recurse-submodules -j4 https://github.com/mikeoliphant/Stompbox
+cd Stompox
 ```
 
 ## Building on Windows
 
 ```bash
+cd build
 cmake.exe -G "Visual Studio 17 2022" -A x64 ..
 cmake --build . --config=release -j4
 ```
@@ -75,6 +77,8 @@ Note - you'll have to change the Visual Studio version if you are using a differ
 If you want to use Jack audio, you need to have Jack for windows installed before building:
 
 https://jackaudio.org/downloads/
+
+Once that is built, you can build the rest from the Visual Studio solution in StompboxUI
 
 ## Building on Liunux/MacOS
 
@@ -87,7 +91,7 @@ sudo apt-get install libjack-jackd2-dev
 Build with:
 
 ```bash
-cd stompbox/build
+cd build
 cmake .. -DCMAKE_BUILD_TYPE="Release"
 make
 ```
@@ -96,22 +100,19 @@ make
 
 To build StompboxRemoteGL on Linux, do the following:
 
-Build StompboxImageProcessor:
-```
-dotnet build -c Release StompboxImageProcessor
-```
+Go into the StompboxUI subfoder.
 
-Run it:
+Run StompboxImageProcessor:
 ```
-StompboxImageProcessor/bin/Release/net8.0/StompboxImageProcessor
+dotnet run --project StompboxImageProcessor
 ```
 
 Build StompboxRemoteGL:
 ```
-dotnet build -c Release StompboxRemoteGL
+dotnet build -c Release StompboxRemoteGL/StompboxRemoteGL.csproj
 ```
 
-and your executable will be: ```StompboxRemoteGL/bin/Release/net8.0/StompboxRemoteGL```
+and your executable will be: ```StompboxRemoteGL/bin/Release/net10.0/StompboxRemoteGL```
 
 **Note:** For file browser input to work, you need to have [Zenity](https://help.gnome.org/users/zenity/stable/index.html.en) installed.
 
