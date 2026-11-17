@@ -20,11 +20,8 @@ jobs:
         
     - name: Run Image Processor
       working-directory: ${{github.workspace}}
-      run: |
-        dotnet build -c Release StompboxUI\StompboxImageProcessor
-        cd StompboxUI\StompboxImageProcessor\bin\Release\net8.0
-        .\StompboxImageProcessor.exe
-        
+      run: dotnet run --project StompboxUI\StompboxImageProcessor
+      
     - name: Build Plugin
       working-directory: ${{github.workspace}}
       run: dotnet build -c Release StompboxUI\StompboxPlugin
@@ -33,7 +30,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: StompboxVST3Plugin
-        path: ${{github.workspace}}\StompboxUI\StompboxPlugin\bin\Release\net8.0-windows
+        path: ${{github.workspace}}\StompboxUI\StompboxPlugin\bin\Release\net10.0-windows
 
     - name: Build for Windows Remote
       working-directory: ${{github.workspace}}
@@ -43,7 +40,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: StompboxRemote
-        path: ${{github.workspace}}\StompboxUI\StompboxRemote\bin\Release\net8.0-windows
+        path: ${{github.workspace}}\StompboxUI\StompboxRemote\bin\Release\net10.0-windows
 
 #    - name: Setup Java
 #      uses: actions/setup-java@v3
